@@ -1,53 +1,12 @@
-UNKNOWN / NEED TO LEARN
+# ✅ Task Manager (Full-Stack)
 
-□ How does Node.js receive HTTP requests?
+> A full-stack personal task manager built to learn how real web applications work end-to-end.  
+> Create, organize, and track tasks with a clean interface, authentication, and persistent storage.
 
-□ How does Express route requests?
-
-□ How does frontend JS call our backend?
-
-□ How should our database tables be designed?
-
-□ How do sessions work?
-
-□ How do cookies work?
-
-□ How should passwords be stored?
-
-□ How do notifications work?
-
-□ How does a calendar integration work?
-
-□ How should charts obtain their data?
-
-□ How do we deploy the application?
-
-
-Version 1
-Browser
-   ↓
-JavaScript
-   ↓
-Node
-   ↓
-SQLite
-
-
-
-# 🚀 [PROJECT NAME]
-
-> [A short, clear description of what this project does.]
-
-<!-- Project badges -->
-![Status](https://img.shields.io/badge/Status-[STATUS]-blue?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-[VERSION]-blue?style=for-the-badge)
-![Language](https://img.shields.io/badge/Language-[LANGUAGE]-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-[LICENSE]-green?style=for-the-badge)
-
-<!-- Optional -->
-<!-- ![GitHub stars](https://img.shields.io/github/stars/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
-<!-- ![GitHub forks](https://img.shields.io/github/forks/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
-<!-- ![GitHub issues](https://img.shields.io/github/issues/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
+![Status](https://img.shields.io/badge/Status-Learning%20%2F%20In%20Development-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-0.1.0-blue?style=for-the-badge)
+![Stack](https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JS%20%7C%20Node.js%20%7C%20Express%20%7C%20SQLite-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ---
 
@@ -56,20 +15,14 @@ SQLite
 - [About The Project](#-about-the-project)
 - [Project Objectives](#-project-objectives)
 - [Features](#-features)
-- [Technologies Used](#-technologies-used)
+- [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
+- [Getting Started & Learning Roadmap](#-getting-started--learning-roadmap)
+- [Development Timeline](#-development-timeline)
+- [What I'm Learning](#-what-im-learning)
 - [Screenshots](#-screenshots)
-- [Getting Started](#-getting-started)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Bugs & Fixes](#-bugs--fixes)
-- [Challenges & Struggles](#-challenges--struggles)
-- [What I Learned](#-what-i-learned)
-- [Development Process](#-development-process)
-- [Roadmap](#-roadmap)
 - [Known Issues](#-known-issues)
 - [Future Improvements](#-future-improvements)
-- [Project Reflection](#-project-reflection)
 - [License](#-license)
 - [Author](#-author)
 
@@ -79,102 +32,97 @@ SQLite
 
 ### What is this project?
 
-[Explain what the project is and what it does.]
+A full-stack **Task Manager** web application where users can create accounts, add tasks, mark them as complete, organize them by priority or due date, and view basic statistics.
 
-Example:
-
-> This project is a desktop application developed using Java that allows users to manage files and folders through a graphical user interface.
+This project is intentionally built as a learning vehicle to understand how the browser, JavaScript, Node.js, and a database work together.
 
 ### Why did I build it?
 
-[Explain why you created the project.]
-
-This project was created to:
-
-- [Reason 1]
-- [Reason 2]
-- [Reason 3]
+- To learn full-stack development by building something practical
+- To understand the complete request/response cycle
+- To create a portfolio project that demonstrates backend + frontend skills
+- To force myself to learn the fundamentals listed below instead of just copying tutorials
 
 ### Project Background
 
-[Explain whether this was a university project, personal project, learning exercise, portfolio project, etc.]
+Personal learning project. Current target stack for Version 1:
+
+**Browser → JavaScript → Node.js → SQLite**
 
 ---
 
 ## 🎯 Project Objectives
 
-The main objectives of this project are:
-
-- [ ] [Objective 1]
-- [ ] [Objective 2]
-- [ ] [Objective 3]
-- [ ] [Objective 4]
+- [ ] Build a clean and usable task management interface
+- [ ] Implement user authentication (signup / login)
+- [ ] Persist tasks in a real database
+- [ ] Understand and implement the full request lifecycle
+- [ ] Deploy a working version of the application
+- [ ] Document everything clearly for portfolio use
 
 ---
 
 ## ✨ Features
 
-### ✅ Implemented Features
+### ✅ Planned for Version 1
+- User registration and login
+- Create, read, update, and delete tasks
+- Mark tasks as complete / incomplete
+- Basic task filtering (All / Active / Completed)
+- Simple dashboard with task counts
 
-- [x] [Feature 1]
-- [x] [Feature 2]
-- [x] [Feature 3]
-
-### 🚧 Features Currently Being Developed
-
-- [ ] [Feature 1]
-- [ ] [Feature 2]
-
-### 🔮 Planned Features
-
-- [ ] [Feature 1]
-- [ ] [Feature 2]
-- [ ] [Feature 3]
+### 🚧 Later Features
+- Due dates & priorities
+- Categories / tags
+- Notifications / reminders
+- Calendar view
+- Charts & statistics
+- Dark mode
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Tech Stack (Version 1)
 
-| Technology | Purpose |
-|---|---|
-| [Java] | [Application development] |
-| [Java Swing] | [Graphical user interface] |
-| [Git] | [Version control] |
-| [GitHub] | [Repository and project management] |
-| [Other] | [Purpose] |
-
-### Languages
-
-- [Language]
-- [Language]
-
-### Frameworks / Libraries
-
-- [Framework]
-- [Library]
-
-### Development Tools
-
-- [IDE]
-- Git
-- GitHub
+| Layer       | Technology              | Purpose                              |
+|-------------|-------------------------|--------------------------------------|
+| Frontend    | HTML, CSS, JavaScript   | User interface & client-side logic   |
+| Backend     | Node.js + Express       | Handle HTTP requests & business logic|
+| Database    | SQLite                  | Store users and tasks                |
+| Auth        | Sessions + Cookies (or JWT later) | Keep users logged in          |
+| Deployment  | Railway / Render / Vercel | Host the application               |
 
 ---
 
-## 📂 Project Structure
+## 📂 Project Structure (Target)
 
 ```text
-[PROJECT NAME]/
+task-manager/
 │
-├── src/
-│   ├── [folder]/
-│   ├── [folder]/
-│   └── [file]
+├── frontend/
+│   ├── index.html          # Main app (after login)
+│   ├── login.html
+│   ├── signup.html
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       ├── app.js          # Main frontend logic
+│       ├── auth.js
+│       └── api.js          # Functions that call the backend
+│
+├── backend/
+│   ├── server.js           # Entry point
+│   ├── routes/
+│   │   ├── auth.js
+│   │   └── tasks.js
+│   ├── models/             # or database setup
+│   ├── middleware/
+│   │   └── auth.js
+│   ├── db/
+│   │   └── database.sqlite
+│   ├── .env.example
+│   └── package.json
 │
 ├── docs/
 │   └── screenshots/
-│
 ├── README.md
-├── DEVELOPMENT_LOG.md
-├── .gitignore
-└── ...
+└── .gitignore
