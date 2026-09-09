@@ -109,3 +109,37 @@ The main goals of this project are to:
 ## 🧠 How It Works
 
 The basic architecture looks like this:
+
+**Key Concepts:**
+
+1. **getUserMedia** – Access camera and microphone
+2. **Signaling** – Exchange connection information (SDP offer/answer + ICE candidates) through a server
+3. **STUN** – Discover public IP address
+4. **TURN** – Relay media when direct P2P is blocked
+5. **ICE** – Framework that tries different connection methods until one works
+
+---
+
+## 📂 Project Structure (Target)
+
+```text
+webrtc-video-call/
+│
+├── frontend/
+│   ├── index.html
+│   ├── css/
+│   │   └── styles.css
+│   └── js/
+│       ├── main.js
+│       ├── webrtc.js          # RTCPeerConnection logic
+│       └── signaling.js       # WebSocket handling
+│
+├── backend/
+│   ├── server.js              # Express + WebSocket signaling server
+│   ├── package.json
+│   └── .env.example
+│
+├── docs/
+│   └── screenshots/
+├── README.md
+└── .gitignore
