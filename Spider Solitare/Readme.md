@@ -1,17 +1,12 @@
-# 🚀 [PROJECT NAME]
+# 🕷️ Spider Solitaire
 
-> [A short, clear description of what this project does.]
+> A classic Spider Solitaire card game built from scratch in the browser.  
+> Deal, arrange sequences, and clear the tableau — just like the original Windows classic.
 
-<!-- Project badges -->
-![Status](https://img.shields.io/badge/Status-[STATUS]-blue?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-[VERSION]-blue?style=for-the-badge)
-![Language](https://img.shields.io/badge/Language-[LANGUAGE]-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-[LICENSE]-green?style=for-the-badge)
-
-<!-- Optional -->
-<!-- ![GitHub stars](https://img.shields.io/github/stars/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
-<!-- ![GitHub forks](https://img.shields.io/github/forks/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
-<!-- ![GitHub issues](https://img.shields.io/github/issues/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
+![Status](https://img.shields.io/badge/Status-In%20Development-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/Version-0.1.0-blue?style=for-the-badge)
+![Stack](https://img.shields.io/badge/Stack-HTML%20%7C%20CSS%20%7C%20JavaScript-orange?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ---
 
@@ -20,20 +15,15 @@
 - [About The Project](#-about-the-project)
 - [Project Objectives](#-project-objectives)
 - [Features](#-features)
-- [Technologies Used](#-technologies-used)
+- [Tech Stack](#-tech-stack)
 - [Project Structure](#-project-structure)
-- [Screenshots](#-screenshots)
 - [Getting Started](#-getting-started)
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Bugs & Fixes](#-bugs--fixes)
-- [Challenges & Struggles](#-challenges--struggles)
-- [What I Learned](#-what-i-learned)
-- [Development Process](#-development-process)
-- [Roadmap](#-roadmap)
+- [How to Play](#-how-to-play)
+- [Development Timeline & Roadmap](#-development-timeline--roadmap)
+- [What I'm Learning](#-what-im-learning)
+- [Screenshots](#-screenshots)
 - [Known Issues](#-known-issues)
 - [Future Improvements](#-future-improvements)
-- [Project Reflection](#-project-reflection)
 - [License](#-license)
 - [Author](#-author)
 
@@ -43,102 +33,89 @@
 
 ### What is this project?
 
-[Explain what the project is and what it does.]
+A browser-based **Spider Solitaire** game. Players arrange cards in descending sequences of the same suit to clear the tableau and win.
 
-Example:
-
-> This project is a desktop application developed using Java that allows users to manage files and folders through a graphical user interface.
+This is a pure frontend project focused on game logic, state management, and smooth interactions — perfect for demonstrating strong JavaScript skills.
 
 ### Why did I build it?
 
-[Explain why you created the project.]
-
-This project was created to:
-
-- [Reason 1]
-- [Reason 2]
-- [Reason 3]
+- To practice complex game logic and state management in vanilla JavaScript
+- To create an engaging, interactive portfolio piece
+- To deepen understanding of drag-and-drop, event handling, and data structures (stacks/arrays for columns)
 
 ### Project Background
 
-[Explain whether this was a university project, personal project, learning exercise, portfolio project, etc.]
+Personal learning + portfolio project. Built to explore advanced frontend concepts through a complete, playable game.
 
 ---
 
 ## 🎯 Project Objectives
 
-The main objectives of this project are:
-
-- [ ] [Objective 1]
-- [ ] [Objective 2]
-- [ ] [Objective 3]
-- [ ] [Objective 4]
+- [x] Create a visually clean card game interface
+- [ ] Implement full Spider Solitaire rules (1-suit, 2-suit, and 4-suit modes)
+- [ ] Add move validation and automatic sequence completion
+- [ ] Include score, timer, and move counter
+- [ ] Support undo / redo functionality
+- [ ] Make it fully responsive and touch-friendly
+- [ ] Deploy a polished live version
 
 ---
 
 ## ✨ Features
 
-### ✅ Implemented Features
+### ✅ Currently Implemented
+- Game board layout (10 columns + stock pile)
+- Card rendering and basic styling
+- [Add whatever you already have working]
 
-- [x] [Feature 1]
-- [x] [Feature 2]
-- [x] [Feature 3]
+### 🚧 In Progress
+- Drag-and-drop or click-to-move card mechanics
+- Valid move detection
+- Dealing new rows from the stock
 
-### 🚧 Features Currently Being Developed
-
-- [ ] [Feature 1]
-- [ ] [Feature 2]
-
-### 🔮 Planned Features
-
-- [ ] [Feature 1]
-- [ ] [Feature 2]
-- [ ] [Feature 3]
+### 🔮 Planned
+- 1-suit / 2-suit / 4-suit difficulty modes
+- Score system + high score (localStorage)
+- Undo / Redo
+- Timer and move counter
+- Win detection + congratulations animation
+- Sound effects (optional)
+- Dark / Light theme toggle
+- Mobile-friendly controls
 
 ---
 
-## 🛠️ Technologies Used
+## 🛠️ Tech Stack
 
-| Technology | Purpose |
-|---|---|
-| [Java] | [Application development] |
-| [Java Swing] | [Graphical user interface] |
-| [Git] | [Version control] |
-| [GitHub] | [Repository and project management] |
-| [Other] | [Purpose] |
+| Layer       | Technology              | Purpose                          |
+|-------------|-------------------------|----------------------------------|
+| Frontend    | HTML5, CSS3, JavaScript | Game UI and all logic            |
+| Styling     | Custom CSS              | Card designs, layout, animations |
+| State       | Vanilla JS              | Game state management            |
+| Storage     | localStorage            | High scores & settings           |
+| Deployment  | GitHub Pages / Vercel / Netlify | Free static hosting     |
 
-### Languages
-
-- [Language]
-- [Language]
-
-### Frameworks / Libraries
-
-- [Framework]
-- [Library]
-
-### Development Tools
-
-- [IDE]
-- Git
-- GitHub
+*(No backend required — this is a pure client-side game)*
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-[PROJECT NAME]/
+spider-solitaire/
 │
-├── src/
-│   ├── [folder]/
-│   ├── [folder]/
-│   └── [file]
-│
+├── index.html              # Main game page
+├── css/
+│   └── style.css           # All styling (cards, board, UI)
+├── js/
+│   ├── game.js             # Core game logic & state
+│   ├── cards.js            # Card creation & deck handling
+│   ├── ui.js               # DOM updates & event listeners
+│   └── utils.js            # Helper functions
+├── assets/
+│   ├── cards/              # Card face & back images (optional)
+│   └── sounds/             # Optional sound effects
 ├── docs/
 │   └── screenshots/
-│
 ├── README.md
-├── DEVELOPMENT_LOG.md
-├── .gitignore
-└── ...
+└── .gitignore
