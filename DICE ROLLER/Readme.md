@@ -1,17 +1,12 @@
-# 🚀 [PROJECT NAME]
+# 🚀 Dice Roller
 
-> [A short, clear description of what this project does.]
+> A clean, responsive client-side utility and random probability simulator engineered to execute independent virtual dice rolls across custom geometric face configurations with integrated history tracking and statistical distribution analysis.
 
 <!-- Project badges -->
-![Status](https://img.shields.io/badge/Status-[STATUS]-blue?style=for-the-badge)
-![Version](https://img.shields.io/badge/Version-[VERSION]-blue?style=for-the-badge)
-![Language](https://img.shields.io/badge/Language-[LANGUAGE]-orange?style=for-the-badge)
-![License](https://img.shields.io/badge/License-[LICENSE]-green?style=for-the-badge)
-
-<!-- Optional -->
-<!-- ![GitHub stars](https://img.shields.io/github/stars/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
-<!-- ![GitHub forks](https://img.shields.io/github/forks/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
-<!-- ![GitHub issues](https://img.shields.io/github/issues/[USERNAME]/[REPOSITORY]?style=for-the-badge) -->
+![Status](https://shields.io)
+![Version](https://shields.io)
+![Language](https://shields.io)
+![License](https://shields.io)
 
 ---
 
@@ -43,25 +38,18 @@
 
 ### What is this project?
 
-[Explain what the project is and what it does.]
-
-Example:
-
-> This project is a desktop application developed using Java that allows users to manage files and folders through a graphical user interface.
+> This project is a lightweight, mobile-first web tool built using modern HTML5, CSS3, and JavaScript that enables users to roll multiple standard tabletop gaming dice simultaneously, displaying cumulative totals, single die results, and granular mathematical probability tracking.
 
 ### Why did I build it?
 
-[Explain why you created the project.]
-
 This project was created to:
-
-- [Reason 1]
-- [Reason 2]
-- [Reason 3]
+- Learn state array compilation methods by dynamically accumulating random datasets across multiple concurrent objects.
+- Master tactile keyframe animations and 3D rotational CSS matrix alterations simulating physics-based tumbling behaviors.
+- Bridge the gap between static user inputs and reactive math engines that process running mathematical sums, highest/lowest throws, and average roll values.
 
 ### Project Background
 
-[Explain whether this was a university project, personal project, learning exercise, portfolio project, etc.]
+This is a functional portfolio widget and visual data handling exercise engineered to practice smooth state machine tracking, client-side randomness filters, and clean mobile-friendly viewport scaling.
 
 ---
 
@@ -69,10 +57,10 @@ This project was created to:
 
 The main objectives of this project are:
 
-- [ ] [Objective 1]
-- [ ] [Objective 2]
-- [ ] [Objective 3]
-- [ ] [Objective 4]
+- [x] Build an instantly responsive dice canvas handling custom element quantities cleanly.
+- [x] Write a zero-latency distribution matrix resolving standard random bounds accurately.
+- [x] Formulate an auto-updating summary deck showing running tallies, addition modifiers, and separate values.
+- [x] Configure a persistent session history feed logging past iterations with an execution reset option.
 
 ---
 
@@ -80,20 +68,18 @@ The main objectives of this project are:
 
 ### ✅ Implemented Features
 
-- [x] [Feature 1]
-- [x] [Feature 2]
-- [x] [Feature 3]
+- **Multi-Die Workspace Array** — Dynamic layout panels allowing users to roll combinations of items (from a single standard die up to a full deck of 10 concurrently).
+- **Tumbling Motion Engine** — Custom 3D CSS keyframe classes that spin, tilt, and toss visual blocks to simulate actual physical gravity states before settling on a numeric layout.
+- **Granular Sum Dashboard** — Immediate score tracking summaries that compute individual item contributions, total math sums, and optional modifier calculations (+/- points).
+- **Session Audit Ledger** — A dedicated scrolling log tracking all past values rolled during the window lifespan, keeping historical totals organized.
 
 ### 🚧 Features Currently Being Developed
 
-- [ ] [Feature 1]
-- [ ] [Feature 2]
+- **Advanced Tabletop Polyhedrals Grid** — Expanding past basic 6-sided dice to support a full set of roleplaying shapes (d4, d8, d10, d12, d20, d100) dynamically.
 
 ### 🔮 Planned Features
 
-- [ ] [Feature 1]
-- [ ] [Feature 2]
-- [ ] [Feature 3]
+- [ ] **Dice Physics Customizer** — Adding canvas parameters that allow users to change gravity rules, velocities, or select distinct visual skins (colors, materials, custom icons).
 
 ---
 
@@ -101,44 +87,148 @@ The main objectives of this project are:
 
 | Technology | Purpose |
 |---|---|
-| [Java] | [Application development] |
-| [Java Swing] | [Graphical user interface] |
-| [Git] | [Version control] |
-| [GitHub] | [Repository and project management] |
-| [Other] | [Purpose] |
+| HTML5 | Semantically coordinates interactive die trigger blocks, numeric adjustments, and forms |
+| CSS3 | Implements 3D perspectives, rotation keyframes, custom grids, and fluid mobile centering |
+| JavaScript (ES6+) | Drives the internal random calculation algorithm, updates score vectors, and triggers animations |
+| Git | Logs development history checkpoints and local workflow branching variations |
+| GitHub | Code archival management and active public web delivery via GitHub Pages pipelines |
 
 ### Languages
 
-- [Language]
-- [Language]
+- HTML5
+- CSS3
+- JavaScript (Vanilla ES6+)
 
 ### Frameworks / Libraries
 
-- [Framework]
-- [Library]
+- None (Built strictly using basic web standards to guarantee near-instantaneous load and execution speeds)
 
 ### Development Tools
 
-- [IDE]
-- Git
-- GitHub
+- VS Code (IDE)
+- Git & GitHub Actions Workspace
+- Browser Layout Reflow Inspector Tools
 
 ---
 
 ## 📂 Project Structure
 
 ```text
-[PROJECT NAME]/
+dice-roller-utility/
 │
 ├── src/
-│   ├── [folder]/
-│   ├── [folder]/
-│   └── [file]
+│   ├── css/
+│   │   └── animation.css   # Handles 3D transformation matrices, tumbling keyframes, and skin themes
+│   ├── js/
+│   │   ├── generator.js    # Random generation matrix engine, modifier math, and array compiling
+│   │   └── app.js          # Main view router tracking actions, spawning dice elements, and updates
+│   └── index.html          # Core interactive control deck markup scaffold
 │
 ├── docs/
-│   └── screenshots/
+│   └── screenshots/        # Assets representing user dashboard interaction metrics
 │
 ├── README.md
 ├── DEVELOPMENT_LOG.md
-├── .gitignore
-└── ...
+└── .gitignore
+```
+
+---
+
+## 🖼️ Screenshots
+
+*(Add your dynamic visual layout previews here once active production sweeps conclude)*  
+*Example placeholder:* `![Dashboard View](docs/screenshots/dice-roller-preview.png)`
+
+---
+
+## 🚀 Getting Started
+
+Follow these direct configuration metrics to deploy and audit the simulation locally.
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com
+   cd dice-roller-utility
+   ```
+
+2. **Boot the project**
+   This utility is a pure static frontend build. No node modules packaging downloads or configuration files are required!
+
+### Usage
+
+1. Open `src/index.html` inside your internet browser workspace window.
+2. Adjust your targeted quantity counts and modifier values using the dashboard sliders.
+3. Tap **Roll Dice** to watch the visual blocks tumble, calculate fresh value metrics, and track updates on the dynamic history timeline.
+
+---
+
+## 🐛 Bugs & Fixes
+
+- **Bug:** Clicking the trigger button repeatedly before animations concluded caused internal score calculations to stack incorrectly.
+- **Fix:** Structured an interactive execution gate that locks control buttons dynamically when animations launch, unlocking them only after the numerical values resolve.
+
+---
+
+## 💡 Challenges & Struggles
+
+The core design difficulty lay in sync-locking the completion of graphic element rotations with the text injection calculations in the DOM nodes. If numeric updates update too quickly, it ruins the suspension of disbelief created by the physics simulation. Resolving this required hooking into the `animationend` browser event listener to coordinate exact update states cleanly.
+
+---
+
+## 🧠 What I Learned
+
+- Learned how to manage 3D perspective frameworks inside standard flat web layouts utilizing advanced style parameters:
+  ```css
+  transform: rotateX(180deg) rotateY(90deg);
+  transform-style: preserve-3d;
+  ```
+- Mastered flexible programmatic array grouping methods to safely isolate individual value points out of complex multi-element triggers:
+  ```javascript
+  const rollResults = Array.from({ length: totalDice }, () => Math.floor(Math.random() * 6) + 1);
+  ```
+
+---
+
+## 🛠️ Development Process
+
+The system blueprint prioritized internal random math evaluation scripts first: ensuring distribution frequencies were evenly mapped inside tracking tools, building out the semantic HTML panel decks second, and fine-tuning fluid 3D tumbling styles last.
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Phase 1: High-fidelity multi-die numerical array aggregation verified.
+- [x] Phase 2: Integrated 3D tumbling rotation style matrix active.
+- [ ] Phase 3: Polyhedral shape configuration scaling framework deployment.
+
+---
+
+## ⚠️ Known Issues
+
+- Setting item rolling metrics past 25 elements simultaneously can cause brief layout crowding on minor legacy mobile viewing cards.
+
+---
+
+## 🚀 Future Improvements
+
+- Incorporate an automated audio playback module triggering real-time multi-channel sound loops of rattling plastic components matching your current die choice inputs.
+
+---
+
+## 📝 Project Reflection
+
+Building this application provided great perspective on how concise structural event listeners keep basic layouts feeling immensely dynamic. Separating calculation logic from visual presentation nodes keeps the codebase highly modifiable and direct to scale.
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+## 👤 Author
+
+* **Your Name** - [GitHub Profile](https://github.com) | [LinkedIn](https://linkedin.com)
