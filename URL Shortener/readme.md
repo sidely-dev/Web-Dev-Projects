@@ -1,6 +1,6 @@
 # 🔗 SnapLink (Scalable URL Shortener)
 
-> A high-performance, full-stack URL-shortening service engineered to convert long URLs into compact links while supporting rapid redirection, real-time analytics, caching, and abuse protection.
+> A high-performance, full-stack URL-shortening service engineered to convert long URLs into compact links while supporting rapid redirection, real-time analytics, caching, and abuse protection. Test2
 
 ![Status](https://shields.io)
 ![Version](https://shields.io)
