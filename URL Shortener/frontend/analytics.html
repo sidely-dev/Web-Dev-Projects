@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnapLink | Network Analytics Dashboard</title>
+  <!-- Load the same beautiful paint styles from our homepage -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Load Chart.js - a beginner-friendly tool to draw charts easily -->
+  <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+
+  <div class="app-container" style="max-width: 800px;">
+    <header class="app-header">
+      <h1>📊 Live Network Analytics</h1>
+      <p>Real-time performance metrics and click traffic tracking insights.</p>
+    </header>
+
+    <main class="main-card" style="text-align: left;">
+      <!-- Total Clicks counter hero block -->
+      <div style="background-color: #0f172a; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 1px solid #334155; text-align: center;">
+        <h2 style="font-size: 1rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;">Total Redirect Volume</h2>
+        <p id="totalClicksCount" style="font-size: 3rem; font-weight: 800; color: #4ade80; margin-top: 5px;">0</p>
+      </div>
+
+      <!-- Graph Grid layout system -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; min-height: 25px;">
+        <!-- Card 1: Browser Metrics -->
+        <div style="background-color: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #334155;">
+          <h3 style="font-size: 0.9rem; color: #38bdf8; margin-bottom: 15px;">Top Web Browsers</h3>
+          <canvas id="browserChart"></canvas>
+        </div>
+
+        <!-- Card 2: OS Metrics -->
+        <div style="background-color: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #334155;">
+          <h3 style="font-size: 0.9rem; color: #38bdf8; margin-bottom: 15px;">Operating Systems</h3>
+          <canvas id="osChart"></canvas>
+        </div>
+      </div>
+    </main>
+
+    <footer class="app-footer">
+      <a href="index.html" class="analytics-link">⬅ Back to Link Shortener Dashboard</a>
+    </footer>
+  </div>
+
+  <!-- Load our chart builder logic script module -->
+  <script src="metrics.js"></script>
+</body>
+</html>

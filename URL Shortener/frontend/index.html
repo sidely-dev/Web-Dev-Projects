@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+  <div class="app-container">
+    
+    <header class="app-header">
+      <h1>🔗 SnapLink</h1>
+      <p>Transform long, messy URLs into clean, shareable shortcuts instantly.</p>
+    </header>
+
+    <!-- Main user interaction form -->
+    <main class="main-card">
+      <form id="shortenForm" class="shorten-form">
+        <input 
+          type="url" 
+          id="longUrlInput" 
+          placeholder="Paste your long destination link here (e.g., https://example.com)..." 
+          required
+        >
+        <button type="submit" id="submitBtn">Shorten Link</button>
+      </form>
+
+      <!-- Hidden Result Section (This pops up dynamically via JS when our backend responds) -->
+      <div id="resultContainer" class="result-container hidden">
+        <p class="result-label">Your shortened link is ready:</p>
+        <div class="result-box">
+          <input type="text" id="shortUrlOutput" readonly>
+          <button id="copyBtn">📋 Copy</button>
+        </div>
+        <p id="successToast" class="toast hidden">Copied to clipboard!</p>
+      </div>
+    </main>
+
+    <!-- Simple utility navigational subfooter links -->
+    <footer class="app-footer">
+      <a href="analytics.html" class="analytics-link">📊 View Live Network Analytics Dashboard</a>
+    </footer>
+  </div>
+
+  <!-- Load our client interaction javascript script file -->
+  <script src="main.js"></script>
+</body>
+</html>
