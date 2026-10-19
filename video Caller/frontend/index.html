@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Caller Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="header">
+        <!-- Sidebar Navigation -->
+        <nav>
+            <img src="world-wide-signal.png" class="logo" alt="Logo">
+            <ul>
+                <li class="active-tab"><img src="bell.png" class="active" alt="Alerts"></li>
+                <li><img src="people.png" alt="Users"></li>
+                <li><img src="chatting.png" alt="Messages"></li>
+                <li><img src="history.png" alt="Logs"></li>
+                <li><img src="setting.png" alt="Settings"></li>
+            </ul>
+        </nav>
+
+        <!-- Primary Control & Display Viewport -->
+        <div class="container">
+            <div class="top-icons">
+                <img src="burger-bar.png" class="icon-btn" alt="Menu">
+                <img src="magnifying-glass.png" class="icon-btn" alt="Search">
+            </div>
+            
+            <div class="main-workspace">
+                <!-- Video Stream Host Engine -->
+                <div class="col-1">
+                    <div class="video-frame">
+                        <img src="random.png" class="host" alt="Main Stream Feed">
+                    </div>
+                    <div class="controls">
+                        <div class="control-btn"><img src="mic.png" alt="Mute"></div>
+                        <div class="control-btn danger-btn"><img src="decline.png" alt="Decline"></div>
+                        <div class="control-btn action-btn"><img src="phone-call.png" class="phone-icon" alt="Call"></div>
+                        <div class="control-btn"><img src="chatting.png" alt="Chat"></div>
+                        <div class="control-btn"><img src="cast.png" alt="Screen Share"></div>
+                    </div>
+                </div>
+
+                <!-- Room Operations & Participant Roster -->
+                <div class="col-2">
+                    <div class="joined glass-card">
+                        <p class="section-title">Live people</p>
+                        <div class="user-avatars">
+                            <img src="user.png" alt="Peer">
+                            <img src="user.png" alt="Peer">
+                            <img src="download.png" class="action-avatar" alt="Data Track">
+                            <img src="user.png" alt="Peer">
+                        </div>
+                    </div>
+                     <div class="invite glass-card">
+                        <p class="section-title">Invite more people</p>
+                        <button class="add-btn">
+                            <img src="add.png" alt="Add Icon">
+                        </button>
+                    </div>   
+                </div> 
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

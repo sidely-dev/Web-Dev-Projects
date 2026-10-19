@@ -1,0 +1,7 @@
+# Block node modules anywhere inside the project paths
+**/node_modules/
+node_modules/
+
+# Block environment secret profiles anywhere
+**/.env
+.env

@@ -1,0 +1,305 @@
+/* Universal Base Reset and Element Normalisation */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #0b0f19;
+    color: #f1f5f9;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Master Header Structural Split (Sidebar + Dashboard Container) */
+.header {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 🧭 Sidebar Navigation styling */
+nav {
+    background-color: #111827;
+    width: 84px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+nav .logo {
+    width: 36px;
+    height: auto;
+    margin-bottom: 48px;
+    filter: drop-shadow(0 0 8px #38bdf8);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+}
+
+nav ul li {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+nav ul li img {
+    width: 22px;
+    height: 22px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+nav ul li:hover, nav ul li.active-tab {
+    background-color: rgba(56, 189, 248, 0.1);
+}
+
+nav ul li:hover img, nav ul li.active-tab img {
+    opacity: 1;
+    filter: drop-shadow(0 0 4px #38bdf8);
+}
+
+/* 🖥️ Main Dashboard Dashboard Canvas Container */
+.container {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    max-width: 1600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Upper Search & Utilities Control row */
+.top-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.icon-btn {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.icon-btn:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Grid workspace area management */
+.main-workspace {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 28px;
+    align-items: start;
+    width: 100%;
+}
+
+/* 🎥 Column 1: Video Engine Viewport Frame and Controls array */
+.col-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.video-frame {
+    background-color: #030712;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-frame .host {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Floating Actions Console Tray styling */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 14px 28px;
+    border-radius: 16px;
+    align-self: center;
+}
+
+.control-btn {
+    width: 46px;
+    height: 46px;
+    background-color: #1f2937;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.control-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.control-btn:hover {
+    background-color: #374151;
+    transform: translateY(-2px);
+}
+
+/* Highlighted Action Call Control States */
+.control-btn.danger-btn {
+    background-color: #dc2626;
+}
+.control-btn.danger-btn:hover {
+    background-color: #b91c1c;
+    box-shadow: 0 0 12px rgba(220, 38, 38, 0.4);
+}
+
+.control-btn.action-btn {
+    background-color: #16a34a;
+}
+.control-btn.action-btn:hover {
+    background-color: #15803d;
+    box-shadow: 0 0 12px rgba(22, 163, 74, 0.4);
+}
+
+/* 👥 Column 2: User Status and Information Modules */
+.col-2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.glass-card {
+    background: rgba(17, 24, 39, 0.55);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #94a3b8;
+    margin-bottom: 16px;
+}
+
+/* Dynamic avatar cluster arrangement layout */
+.user-avatars {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.user-avatars img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #111827;
+    background-color: #374151;
+}
+
+/* Non-avatar utility tracks inside row */
+.user-avatars .action-avatar {
+    background-color: rgba(56, 189, 248, 0.1);
+    padding: 8px;
+    object-fit: contain;
+    border: 1px dashed #38bdf8;
+}
+
+/* Call Actions Button configuration */
+.add-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #38bdf8 0%, #2563eb 100%);
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-btn img {
+    width: 20px;
+    height: 20px;
+}
+
+.add-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+}
+
+/* 📱 Responsive Device Adjustment Media Queries Breakpoint rules */
+@media (max-width: 1024px) {
+    .main-workspace {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .header {
+        flex-direction: column;
+    }
+    nav {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    nav .logo {
+        margin-bottom: 0;
+    }
+    nav ul {
+        flex-direction: row;
+        width: auto;
+        gap: 12px;
+    }
+    .container {
+        padding: 16px;
+    }
+    .controls {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+}
