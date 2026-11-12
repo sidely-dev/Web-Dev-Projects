@@ -17,11 +17,14 @@ export default function Pitch ({ children }){
                 <circle cx="525" cy="340" r="91.5" fill="none"  stroke="white" strokeWidth="3" />
                 <circle cx="525" cy="340" r="4" fill="white"/>
 
-                {/* Left & Right Penalty Boxex */}
+                {/* Left & Right Penalty Boxex & Penalty Spots*/}
                 <rect x="25" y="125" width="165" height="403" fill="none" stroke="white" strokeWidth="3"  />
-                <rect x="860" y="125" width="165" height="403" fill="none" stroke="white" strokeWidth="3" />
+                <rect x="970" y="125" width="165" height="403" fill="none" stroke="white" strokeWidth="3" />
+                <circle cx="135" cy="340" r="4" fill="white" />
+                <circle cx="915" cy="340" r="4" fill="white" />
 
                 {/*The Player Profiles Go Here */}
+                { children }
 
             </svg>
         </div>
