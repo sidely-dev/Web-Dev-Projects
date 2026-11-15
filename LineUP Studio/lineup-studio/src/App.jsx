@@ -94,7 +94,12 @@ export default function App(){
                     const position = currentPositions[index];
                     return (
                     <PlayerToken
-                        key={player.id} number={player.number} name={player.name} x={position.x} y={position.y} color={player.color}
+                        key={player.id} number={player.number} name={player.name} x={player.x} y={player.y} color={player.color}
+                        isDragging={draggePlayerID === player.id}
+                        onPointerDown={(e) =>{
+                            e.stopPropagation();
+                            setDraggedPlayerID(player.id);
+                        }}
                     />
                     );
                 })};
