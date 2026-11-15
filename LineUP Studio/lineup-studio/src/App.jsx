@@ -47,6 +47,21 @@ export default function App(){
         setPlayers((prevPlayers) => applyFormation(prevPlayers, newFormation));
     }
 
+    //Convert Screen Cursor Coordinates into Svg Coordinates
+    function getPitchCoordinate(e){
+        const svg = svgRef.current;
+        const point = svg.createSVGPoint();
+        point x = e.clientX;
+        point.y = e.clientY;
+        const svgPoint = point.matrixTransform(svg.getScreenCTM().inverse());
+
+        //To keep players inside the white lines
+        const stuckX = Math.max(35, Math.min(1015, svgPoint.x));
+        const stuckY = Math.max(35, Math.min(645, svgPoint.y));
+
+        return{x: stuckX, y: stuckY};
+    }
+
 
 
 
