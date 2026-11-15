@@ -93,4 +93,22 @@ function hasSharedEdge(edge, tri){
     );
 }
 
-//
+//Test to check if point P lies inside circumference of A, B, C
+function isPointInCircumCircle(p, a, b, c){
+    const ax = a.x - p.x;
+    const ay = a.y - p.y;
+    const bx = b.x - p.x;
+    const by = b.y - p.x;
+    const cx = c.x - p.x;
+    const cy = c.y - p.x;
+
+    const solve = 
+        (ax * ax + ay * ay) * (bx * cy - cx * by) - 
+        (bx * bx + by * by) * (ax * cy - cx * ay) + 
+        (cx * cx + cy * cy) * (ax * by - bx * ay);
+
+    //Making sure theres counter-clockwise orientation
+    const orientation = (b.x - a.x) * (c.y - a.x) - (b.y - a.y) * (c.x - a.x);
+    return orientation > 0 ? solve > 0 : solve < 0;
+
+}
