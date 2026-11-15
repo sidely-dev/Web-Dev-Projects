@@ -1,11 +1,12 @@
 import React from "react";
 
 {/*This is a function to generate the field and export it to other functions */}
-export default function Pitch ({ children, svgRef, onPointerMove, onPointerUp }){
+export default function Pitch ({ children, svgRef, onPointerMove, onPointerUp, onPointerDown }){
     return(
         <div style={{ width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
             <svg
                 ref={svgRef}
+                onPointerDown={onPointerDown}
                 onPointerMove={onPointerMove}
                 onPointerUp={onPointerUp}
                 onPointerLeave={onPointerUp}
