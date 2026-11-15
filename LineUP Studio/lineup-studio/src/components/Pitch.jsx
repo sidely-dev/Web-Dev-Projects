@@ -1,12 +1,20 @@
 import React from "react";
 
 {/*This is a function to generate the field and export it to other functions */}
-export default function Pitch ({ children }){
+export default function Pitch ({ children, svgRef, onPointerMove, onPointerUp }){
     return(
         <div style={{ width: '100%', maxWidth: '1000px', margin: '0 auto' }}>
             <svg
+                ref={svgRef}
+                onPointerMove={onPointerMove}
+                onPointerUp={onPointerUp}
+                onPointerLeave={onPointerUp}
                 viewBox="0 0 1050 680"
-                style={{ width: '100%', height: 'auto', display:'block' ,borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)'}}
+                style={{ 
+                    width: '100%', height: 'auto', display:'block' ,borderRadius: '8px', boxShadow: '0 10px 25px rgba(0,0,0,0.3)',
+                    touchAction:"none", // Prevents mobile scrolling while dragging a player
+                    userSelect: "none" // Prevents highlighting text while dragging
+                }}
             >
                 {/* 1. Pitch Grass Background */}
                 <rect x="0" y="0" width="1050" height="680" fill="#2e7d32" />
