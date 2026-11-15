@@ -219,12 +219,61 @@ export default function App(){
             {/* BETWEEN THE LINES*/}
             {overlays.betweenLines && (
                 <g pointerEvents="none">
-                    {/* */}
+                    {/*POCKET SPACE BETWEEN DEFENSE & MIDFIELD */}
+                    <rect
+                        x={Math.min(defenseX, midfieldX) + 22}
+                        y="45"
+                        width={Math.max(10, Math.abs(midfieldX - defenseX) - 44)}
+                        height="590" rx="8" fill="rgba(171, 71, 188, 0.22)" stroke="#ce93d8" strokeWidth="8" strokeDasharray="5 5"
 
+                    />
+                    {/*POCKET BETWEEN MIDFIELD & ATTACK */}
+                    <rect
+                        x={Math.min(midfieldX - attackX) + 22}
+                        y="45"
+                        width={Math.max(10, Math.abs(attackX - defenseX) - 44)}
+                        height="590" rx="8" fill="rgba(171, 71, 188, 0.22)" stroke="#ce93d8" strokeWidth="1.5" strokeDasharray="5 5"
+
+                    />
                 </g>
 
-
             )}
+
+            {/*DELAUNAY TRIANGULAR MESH */}
+            {overlays.delaunay && (
+                <g pointerEvents="none">
+                    {triangles.map((tri, idx) =>(
+                        <shapes
+                            key={idx}
+                            points={`${tri[0].x},${tri[0].y} ${tri[1].x},${tri[1].y} ${tri[2].x},${tri[2].y}`}
+                            fill="rgba(0, 229, 255, , 0.08)"
+                            stroke="#00e5ff"
+                            strokeWidth="2"
+                        />
+                    ))}
+                </g>
+            )}
+
+            {/*Line Breaking Pass Arrow */}
+            <g pointerEvents="none">
+                {passArrows.map((arrow) => (
+                    <line  
+                        key={arrow.id} x1={arrow.x1} y1={arrow.y1} x2={arrow.x2} y2={arrow.y2} stroke="#ff5252" strokeWidth="4"
+                        strokeDasharray=" 8 4"
+                        markerEnd='url(#pass-arrowhead)'
+                    />
+                ))}
+                {draftArrow && (
+                    <line
+                        x1={draftArrow.x1} y1={draftArrow.y1} x2={draftArrow.x2} y2={draftArrow.y2} stroke='#ff5252' strokeWidth="4"
+                        strokeDasharray="6 4"
+                        markerEnd='url(#pass-arrowhead)'
+                    />
+                )}
+
+            </g>
+
+            {/*Player Tokens */}
 
                 {players.map((player) => {
                     return (
@@ -232,6 +281,7 @@ export default function App(){
                         key={player.id} number={player.number} name={player.name} x={player.x} y={player.y} color={player.color}
                         isDragging={draggePlayerID === player.id}
                         onPointerDown={(e) =>{
+                            if(isDrawingPass) return; // Let the Pitch handle pass drawing when active
                             e.stopPropagation();
                             setDraggedPlayerID(player.id);
                         }}
