@@ -62,7 +62,22 @@ export default function App(){
         return{x: stuckX, y: stuckY};
     }
 
+    function handlePointerMoves(e){
+        if(draggePlayerID === null )
+        return;
 
+        const {x, y}=getPitchCoordinate(e);
+
+        setPlayer((prevPlayers) => 
+            prevPlayers.map((player) => 
+                player.id === draggePlayerID ? {...player,x,y} : player
+            )
+        );
+    }
+
+    function handlePointerUp(){
+        setDraggedPlayerID(null);
+    }
 
 
     return(
