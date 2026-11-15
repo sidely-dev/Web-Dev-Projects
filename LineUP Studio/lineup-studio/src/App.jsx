@@ -103,9 +103,26 @@ export default function App(){
 
         if(draftArrow !== null){
             //Only save arrow if dragged aleast 20 UNITS.
-            const distance = Math.hypot();
+            const distance = Math.hypot(draftArrow.x2 - draftArrow.x1, draftArrow.y2 -draftArrow.y1);
+
+            if(distance > 20){
+                setPassArrows((prev) => [...prev ,{ ...draftArrow, id: Date.now()}])
+            }
         }
+        setPassArrows(null);
     }
+
+    //CALCULATE DELAUNCY TRIANGLE FOR OUTFIELD PLAYERS (GOALKEEPER IS INDEX 0)
+    const outFieldPlayer = players.slice(1);
+    const triangles = overlays.delaunay ? calculateDelaunayTriangles(outFieldPlayer) :  [];
+
+
+    //CALCUALATE TACTICAL FROM PLAYER POSITIONS
+    const defenseX = players.slice(1, 5).reduce((sum, p) => sum + p.x, 0) / 4;
+    const midfieldX = players.slice(5, 8).reduce((sum, p) => sum + p.x, 0) /3;
+    const attackX = players.slice(8, 11).reduce((sum, p) => sum + p.x, 0) /3;
+
+
 
     //HANDLE CLICKING ON THE PITCH GRASS
     function handlePitchPointerDown(e){
@@ -138,19 +155,42 @@ export default function App(){
 
     return(
         <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto'}}>
+            <div
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap'}}
+            >   
+                <FormationSelector
+                    selectedFormation={selectedFormation}
+                    onSelectFormation={setSelectedFormation}
+                    formations={Object.keys(FORMATIONS)}
+                />
+            </div>
+            <TacticalTools
+                overlays={overlays}
+                onToggleOverlay={toggleOverlay}
+                isDrawingPass={isDrawingPass}
+                onToggleDrawPass={() => setIsDrawingPass((prev) => !prev)}
+                onClearArrows={() => setPassArrows([])}
+                arrowCount={passArrows.length}
 
-            <FormationSelector
-                selectedFormation={selectedFormation}
-                onSelectFormation={setSelectedFormation}
-                formations={Object.keys(FORMATIONS)}
             />
 
             <Pitch
                 svgRef={svgRef}
                 onPointerMove={handlePointerMoves}
                 onPointerUp={handlePointerUp}
+                onPointerDown={handlePitchPointerDown}
+
             
             >
+
+            {/*SVG Arrow Head Marker */}
+            <def>
+                <marker id='pass-arrowhead' markerWidth="70" markerHeight="7" refX="8" refY="3.5" orient="auto">
+                    <shapes points="0 0, 10 3.5,  0 7" fill="#ff5252"/>
+                </marker>
+            </def>
+
+
                 {players.map((player) => {
                     return (
                     <PlayerToken
