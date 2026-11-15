@@ -1,17 +1,22 @@
 import React from 'react'
 
-export default function PlayerToken({ number, name, x, y, color='#d32f2f'}){
+export default function PlayerToken({ number, name, x, y, color='#d32f2f', isDragging, onPointerDown}){
     return(
         <g 
-            
+            onPointerDown={onPointerDown}
             transform={`translate(${x}, ${y})`}
-            style={{ cursor:'pointer', transition: 'transform 0.4s ease-in-out'}}
+            style={{ 
+                cursor: isDragging ? 'grabbing' : 'grab', 
+                transition:  isDragging ? 'none' : 'transform 0.4s ease-in-out'
+            }}
             
         >
 
             {/*Player Shirts shown in a Circle*/}
             <circle
-                cx="0" cy="0" r="22" fill={color} stroke="#ffffff" strokeWidth="3"
+                cx="0" cy="0" r="22" fill={color} 
+                stroke={ isDragging ? "#00e5ff ":"#ffffff"} 
+                strokeWidth={isDragging ? "4":"3"}
             />
 
             {/*Player Numbers in Circles */}
