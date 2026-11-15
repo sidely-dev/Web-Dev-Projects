@@ -2,7 +2,10 @@ import React, { useState, useRef } from 'react';
 import Pitch from './components/Pitch.jsx';
 import PlayerToken from './components/PlayerToken.jsx';
 import FormationSelector  from './components/FormationSelector.jsx';
+import TacticalTools from './components/TacticalTools.jsx';
 import { FORMATIONS } from './data/formations.js';
+import { calculateDelaunayTriangles } from './utils/geometry.js'
+
 
 //Staring XI From Left to Right
 const baseSquad = [
@@ -41,6 +44,26 @@ export default function App(){
     const [draggePlayerID, setDraggedPlayerID] = useState(null);
     const svgRef = useRef(null);
 
+
+    //Tactical Overlays Toggles
+    const [overlays, setOverlays] = useState({
+        delaunay: false,
+        halfSpaces: false,
+        unitLines: false,
+        betweenLines: false,
+    });
+
+    //LINE BREAKING PASS ARROW STATE
+    const [isDrawingPass, setIsDrawingPass] = useState(false);
+    const [passArrows, setPassArrows] = useState([]);
+    const [draftArrow, setDraftArrow] = useState(null);
+
+    function toggleOverlay(key){
+        setOverlays((prev) => ({...prev, [key]: !prev[key]}));
+
+    }
+
+
     //Switch Formation & Reset Players to new Formation coordinates
     function handleFormationChange(newFormation){
         setSelectedFormation(newFormation);
@@ -77,7 +100,40 @@ export default function App(){
 
     function handlePointerUp(){
         setDraggedPlayerID(null);
+
+        if(draftArrow !== null){
+            //Only save arrow if dragged aleast 20 UNITS.
+            const distance = Math.hypot();
+        }
     }
+
+    //HANDLE CLICKING ON THE PITCH GRASS
+    function handlePitchPointerDown(e){
+        if(!isDrawingPass) return;
+        const coords = getPitchCoordinate(e);
+        setDraftArrow({ x1: coords.x, y1: coords.y, x2: coords.x, y2: coords.y});
+
+    }
+
+    function handlePointerMove(e){
+        const coords = getPitchCoordinate(e);
+
+        //Update Dragged Player Position
+        if(draggePlayerID !== null){
+            setPlayers((prevPlayers) => prevPlayers.map((player) => 
+                player.id === draggePlayerID ? { ...player, x: coords.x, y: coords.y} : player));
+            return;
+        }
+
+        //Update Pass Arrow Endpoint
+        if(draftArrow !== null){
+            setDraftArrow((prev) => ({ ...prev, x2: coords.x, y2: coords.y }));
+        }
+
+
+
+    }
+
 
 
     return(
