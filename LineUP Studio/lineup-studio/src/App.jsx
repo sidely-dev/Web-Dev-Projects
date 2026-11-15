@@ -5,7 +5,7 @@ import FormationSelector  from './components/FormationSelector.jsx';
 import { FORMATIONS } from './data/formations.js';
 
 //Staring XI From Left to Right
-const initialSquad = [
+const baseSquad = [
     { id:1, number: 1, name: 'Alisson', x: 90, y: 340, color:'#fcb02d'}, //GK
     { id:2, number: 2, name: 'Walker', x: 260, y: 110 }, //RB
     { id:3, number: 3, name: 'Van Dijk', x: 230, y: 260 }, //CB
@@ -27,7 +27,7 @@ function applyFormation(squad, formationName){
     return squad.map((player, index) => ({
         ...player, 
         x: positions[index].x,
-        y: postions[index].y,
+        y: positions[index].y,
     }));
 
 }
@@ -51,7 +51,7 @@ export default function App(){
     function getPitchCoordinate(e){
         const svg = svgRef.current;
         const point = svg.createSVGPoint();
-        point x = e.clientX;
+        point.x = e.clientX;
         point.y = e.clientY;
         const svgPoint = point.matrixTransform(svg.getScreenCTM().inverse());
 
@@ -89,9 +89,13 @@ export default function App(){
                 formations={Object.keys(FORMATIONS)}
             />
 
-            <Pitch>
-                {initialSquad.map((player, index) => {
-                    const position = currentPositions[index];
+            <Pitch
+                svgRef={svgRef}
+                onPointerMove={handlePointerMoves}
+                onPointerUp={handlePointerUp}
+            
+            >
+                {player.map((player) => {
                     return (
                     <PlayerToken
                         key={player.id} number={player.number} name={player.name} x={player.x} y={player.y} color={player.color}
