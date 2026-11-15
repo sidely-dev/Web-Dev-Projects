@@ -27,6 +27,11 @@ const baseSquad = [
 function applyFormation(squad, formationName){
     const positions = FORMATIONS[formationName];
 
+    if(!positions){
+        console.warn(`Formation "${formationName}" not found in Formations`);
+        return squad; // Keep existing players instead of returning null/undefined
+    }
+
     return squad.map((player, index) => ({
         ...player, 
         x: positions[index].x,
@@ -41,7 +46,7 @@ function applyFormation(squad, formationName){
 export default function App(){
     const [selectedFormation, setSelectedFormation] = useState('4-3-3');
     const [players, setPlayers] = useState(() => applyFormation(baseSquad, '4-3-3'));
-    const [draggePlayerID, setDraggedPlayerID] = useState(null);
+    const [draggePlayerID, setDraggedPlayerID] = useState([]);
     const svgRef = useRef(null);
 
 
@@ -67,7 +72,11 @@ export default function App(){
     //Switch Formation & Reset Players to new Formation coordinates
     function handleFormationChange(newFormation){
         setSelectedFormation(newFormation);
-        setPlayers((prevPlayers) => applyFormation(prevPlayers, newFormation));
+        setPlayers((prevPlayers) => {
+            const safeSquad = prevPlayers || baseSquad;
+            return applyFormation(prevPlayers, newFormation);
+        });
+        
     }
 
     //Convert Screen Cursor Coordinates into Svg Coordinates
@@ -170,7 +179,7 @@ export default function App(){
                 isDrawingPass={isDrawingPass}
                 onToggleDrawPass={() => setIsDrawingPass((prev) => !prev)}
                 onClearArrows={() => setPassArrows([])}
-                arrowCount={passArrows.length}
+                arrowCount={passArrows?.length || 0}
 
             />
 
@@ -256,7 +265,7 @@ export default function App(){
 
             {/*Line Breaking Pass Arrow */}
             <g pointerEvents="none">
-                {passArrows.map((arrow) => (
+                {(passArrows || []).map((arrow) => (
                     <line  
                         key={arrow.id} x1={arrow.x1} y1={arrow.y1} x2={arrow.x2} y2={arrow.y2} stroke="#ff5252" strokeWidth="4"
                         strokeDasharray=" 8 4"
@@ -274,8 +283,7 @@ export default function App(){
             </g>
 
             {/*Player Tokens */}
-
-                {players.map((player) => {
+                {(players || []).map((player) => {
                     return (
                     <PlayerToken
                         key={player.id} number={player.number} name={player.name} x={player.x} y={player.y} color={player.color}

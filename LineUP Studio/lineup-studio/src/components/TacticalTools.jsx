@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function TacticalTools({
-    overLays, onToggleOverlay, isDrawingPass, onToggleDrawPass, onClearArrows, arrowCount,
+    overLays={}, onToggleOverlay, isDrawingPass, onToggleDrawPass, onClearArrows, arrowCount,
 
 }) {
     const getButtonStyle = (isActive, accentColor="#00e5ff") => ({
