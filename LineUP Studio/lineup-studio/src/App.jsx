@@ -37,7 +37,7 @@ function applyFormation(squad, formationName){
 
 export default function App(){
     const [selectedFormation, setSelectedFormation] = useState('4-3-3');
-    const [setPlayer, players] = useState(() => applyFormation(baseSquad, '4-3-3'));
+    const [players, setPlayers] = useState(() => applyFormation(baseSquad, '4-3-3'));
     const [draggePlayerID, setDraggedPlayerID] = useState(null);
     const svgRef = useRef(null);
 
@@ -68,7 +68,7 @@ export default function App(){
 
         const {x, y}=getPitchCoordinate(e);
 
-        setPlayer((prevPlayers) => 
+        setPlayers((prevPlayers) => 
             prevPlayers.map((player) => 
                 player.id === draggePlayerID ? {...player,x,y} : player
             )
@@ -95,7 +95,7 @@ export default function App(){
                 onPointerUp={handlePointerUp}
             
             >
-                {player.map((player) => {
+                {players.map((player) => {
                     return (
                     <PlayerToken
                         key={player.id} number={player.number} name={player.name} x={player.x} y={player.y} color={player.color}
