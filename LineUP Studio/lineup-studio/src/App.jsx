@@ -190,6 +190,41 @@ export default function App(){
                 </marker>
             </def>
 
+            {/*HALFSPACES OVERLAY */}
+            {overlays.halfSpaces && (
+                <g pointerEvents="none">
+                    {/*LEFT HALF SPACES [y: 138.5  to 248.5] */}
+                    <rect 
+                        x="25" y="138.5" width="1000" height="110" fill="rgba(255, 202, 40, 0.16)" stroke="rgba(255, 202, 40, 0.5)"
+                        strokeDasharray="6 4"
+                    />
+                    <text x="40" y="160" fill="#ffca28" fontSize="12" fontWeight="bold" opacity="0.85"  >
+                        LEFT HALF SPACE
+                    </text>
+
+                    {/*RIGHT HALF SPACE [y: 431 to 541.5 ] */}
+                    <rect
+                        x="25" y="431" width="1000" height="110" fill="rgba(255, 202, 40, 0.16)" stroke="rgba(255, 202,40, 0.5)" 
+                        strokeDasharray="6 4"
+                    />
+                    <text x="40" y="530" fill="#ffca28" fontSize="12" fontWeight="bold" opacity="0.85">
+                        RIGHT HALF SPACE
+                    </text>
+
+                </g>
+
+
+                
+            )}
+            {/* BETWEEN THE LINES*/}
+            {overlays.betweenLines && (
+                <g pointerEvents="none">
+                    {/* */}
+
+                </g>
+
+
+            )}
 
                 {players.map((player) => {
                     return (
