@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Pitch from './components/Pitch.jsx';
 import PlayerToken from './components/PlayerToken.jsx';
 import FormationSelector  from './components/FormationSelector.jsx';
@@ -20,10 +20,35 @@ const initialSquad = [
     
 ];
 
+//Function that attaches formation coordinates to all players
+function applyFormation(squad, formationName){
+    const positions = FORMATIONS[formationName];
+
+    return squad.map((player, index) => ({
+        ...player, 
+        x: positions[index].x,
+        y: postions[index].y,
+    }));
+
+}
+
+
+
 
 export default function App(){
     const [selectedFormation, setSelectedFormation] = useState('4-3-3');
-    const currentPositions = FORMATIONS[selectedFormation];
+    const [setPlayer, players] = useState(() => applyFormation(baseSquad, '4-3-3'));
+    const [draggePlayerID, setDraggedPlayerID] = useState(null);
+    const svgRef = useRef(null);
+
+    //Switch Formation & Reset Players to new Formation coordinates
+    function handleFormationChange(newFormation){
+        setSelectedFormation(newFormation);
+        setPlayers((prevPlayers) => applyFormation(prevPlayers, newFormation));
+    }
+
+
+
 
     return(
         <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto'}}>
