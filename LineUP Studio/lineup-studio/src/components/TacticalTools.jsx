@@ -38,15 +38,50 @@ export default function TacticalTools({
                 Half Spaces
             </button>
 
-            <button>
-                
+            <button
+                type="button"
+                onClick={()=> onToggleOverlay('unitLines')}
+                style={getButtonStyle(overLays.unitLines, "#66bb6a")}
+            >
+                Formation Lines
+            </button>
+
+            <button
+                type='button'
+                onClick={()=> onToggleOverlay('betweenLines')}
+                style={getButtonStyle(overLays.betweenLines, "#ab47bc")}
+            >
+                Between The Lines
             </button>
 
 
+            {/*Divider */}
+            <div style={{width: "1px", backgroundColor: "#333", margin: "0 4px", }} />
 
+            {/*Line BREAKING PASS AAROW TOOL */}
+            <button
+                type='button'
+                onClick={()=> onToggleDrawPass}
+                style={getButtonStyle(isDrawingPass, "#ff5252")}
 
+            >
+                {isDrawingPass ? 'Drawing Pass (Drag on Pitch) ' : 'Line-Breaking Pass'}
 
+            </button>
 
+            {arrowCount > 0 && (
+                <button
+                    type="button"
+                    onClick={onClearArrows}
+                    style={{ 
+                        padding: "8px 12px", borderRadius: "6px", border: "1px solid #555", backgroundColor: "#2a1515",
+                         color: "#ff8a80", fontSize: "13px", cursor: "pointer",
+                        }}
+                >
+                    Clear Passes ({arrowCount})
+                </button>
+                )
+            }
 
         </div>
     )
