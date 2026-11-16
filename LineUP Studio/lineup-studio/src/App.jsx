@@ -275,6 +275,39 @@ export default function App(){
 
             </g>
 
+            {/* FORMATION UNIT LINES */}
+            {overlays.unitLines && (
+            <g pointerEvents="none">
+                {[
+                { label: 'DEFENSIVE LINE', x: defenseX },
+                { label: 'MIDFIELD LINE', x: midfieldX },
+                { label: 'ATTACKING LINE', x: attackX },
+                ].map((unit) => (
+                <g key={unit.label}>
+                    <line
+                    x1={unit.x}
+                    y1="25"
+                    x2={unit.x}
+                    y2="655"
+                    stroke="#69f0ae"
+                    strokeWidth="3"
+                    strokeDasharray="10 6"
+                    />
+                    <text
+                    x={unit.x}
+                    y="45"
+                    textAnchor="middle"
+                    fill="#69f0ae"
+                    fontSize="11"
+                    fontWeight="bold"
+                    >
+                    {unit.label}
+                    </text>
+                </g>
+                ))}
+            </g>
+            )}
+
             {/*Player Tokens */}
                 {(players || []).map((player) => {
                     return (
