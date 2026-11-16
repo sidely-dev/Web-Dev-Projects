@@ -46,7 +46,7 @@ function applyFormation(squad, formationName){
 export default function App(){
     const [selectedFormation, setSelectedFormation] = useState('4-3-3');
     const [players, setPlayers] = useState(() => applyFormation(baseSquad, '4-3-3'));
-    const [draggePlayerID, setDraggedPlayerID] = useState([]);
+    const [draggePlayerID, setDraggedPlayerID] = useState(null);
     const svgRef = useRef(null);
 
 
@@ -94,18 +94,7 @@ export default function App(){
         return{x: stuckX, y: stuckY};
     }
 
-    function handlePointerMoves(e){
-        if(draggePlayerID === null )
-        return;
-
-        const {x, y}=getPitchCoordinate(e);
-
-        setPlayers((prevPlayers) => 
-            prevPlayers.map((player) => 
-                player.id === draggePlayerID ? {...player,x,y} : player
-            )
-        );
-    }
+    
 
     function handlePointerUp(){
         setDraggedPlayerID(null);
@@ -189,7 +178,7 @@ export default function App(){
 
             <Pitch
                 svgRef={svgRef}
-                onPointerMove={handlePointerMoves}
+                onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerDown={handlePitchPointerDown}
 
@@ -252,19 +241,19 @@ export default function App(){
 
             )}
 
-            {/*DELAUNAY TRIANGULAR MESH */}
+            {/* DELAUNAY TRIANGULATION MESH */}
             {overlays.delaunay && (
-                <g pointerEvents="none">
-                    {triangles.map((tri, idx) =>(
-                        <shapes
-                            key={idx}
-                            points={`${tri[0].x},${tri[0].y} ${tri[1].x},${tri[1].y} ${tri[2].x},${tri[2].y}`}
-                            fill="rgba(0, 229, 255, , 0.08)"
-                            stroke="#00e5ff"
-                            strokeWidth="2"
-                        />
-                    ))}
-                </g>
+            <g pointerEvents="none">
+                {triangles.map((tri, idx) => (
+                <polygon
+                    key={idx}
+                    points={`${tri[0].x},${tri[0].y} ${tri[1].x},${tri[1].y} ${tri[2].x},${tri[2].y}`}
+                    fill="rgba(0, 229, 255, 0.12)"
+                    stroke="#00e5ff"
+                    strokeWidth="2"
+                />
+                ))}
+            </g>
             )}
 
             {/*Line Breaking Pass Arrow */}

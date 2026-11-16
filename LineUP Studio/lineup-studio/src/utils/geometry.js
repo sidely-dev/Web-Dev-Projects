@@ -18,97 +18,83 @@
 
 */
 
-export function calculateDelaunayTriangles(points){
-    if (!points || points.length > 3)
-        return [];
+export function calculateDelaunayTriangles(points) {
+  if (!points || points.length < 3) return [];
 
-    //Create a Giant Triangle that cover the entire Pitch
-    const giantTriangle = [
-        {x: -1000, y: 1000},
-        {x: 3000, y: -1000},
-        {x: 525, y: 3000},
-    ];
+  const superTriangle = [
+    { x: -1000, y: -1000 },
+    { x: 3000, y: -1000 },
+    { x: 525, y: 3000 },
+  ];
 
-    let triangles = [giantTriangle];
+  let triangles = [superTriangle];
 
-    //Adding each player point
-    points.forEach((point) => {
-        const badTriangles = [];
+  points.forEach((point) => {
+    const badTriangles = [];
 
-        // Find all triangles whose circumcircle contains the new point
-        triangles.forEach((tri)=>{
-            if(isPointInCircumCircle(point, tri[0], tri[1], tri[2])){
-                badTriangles.push(tri)
-            }
-        });
-
-        // Get the outer rim of the empty gap left by deleted triangles
-        const shapes = [];
-        badTriangles.forEach((tri) => {
-            const edges = [
-                [tri[0], tri[1]],
-                [tri[1], tri[2]],
-                [tri[2], tri[0]],
-            ]
-        });
-
-        edges.forEach((edge) => {
-            const isShared = badTriangles.some(
-                (otherTri) => otherTri !== tri && hasSharedEdge(egde, otherTri)
-            );
-            if(isShared){
-                shapes.push(edge);
-            }
-
-        });
-
-        // Remove bad triangles and re-triangulate the hole with the new point
-        triangles = triangles.filter((tri) => !badTriangles.includes(tri));
-        shapes.forEach((edge) => {
-            triangles.push([edge[0], edge[1], point])
-        });
-
-
+    triangles.forEach((tri) => {
+      if (isPointInCircumcircle(point, tri[0], tri[1], tri[2])) {
+        badTriangles.push(tri);
+      }
     });
 
-    // 3. Remove any triangles connected to the original super-triangle vertices
-    return triangles.filter(
-        (tri) =>
-            !tri.some((vertex) =>
-                giantTriangle.some((st) => st.x === vertex.x && st.y === vertex.y)
-            )
-    );
-    
-};
-
-//Check if two triangles share a edge
-function hasSharedEdge(edge, tri){
-    const triEdges = [
+    const polygon = [];
+    badTriangles.forEach((tri) => {
+      const edges = [
         [tri[0], tri[1]],
         [tri[1], tri[2]],
         [tri[2], tri[0]],
-    ];
-    return triEdges.some(
-        ([a, b]) => (a === edge[0] && b === edge[1] || a === edge[1] && b === edge[0])
-    );
+      ];
+
+      edges.forEach((edge) => {
+        const isShared = badTriangles.some(
+          (otherTri) => otherTri !== tri && hasSharedEdge(edge, otherTri)
+        );
+        if (!isShared) {
+          polygon.push(edge);
+        }
+      });
+    });
+
+    triangles = triangles.filter((tri) => !badTriangles.includes(tri));
+    polygon.forEach((edge) => {
+      triangles.push([edge[0], edge[1], point]);
+    });
+  });
+
+  return triangles.filter(
+    (tri) =>
+      !tri.some((vertex) =>
+        superTriangle.some((st) => st.x === vertex.x && st.y === vertex.y)
+      )
+  );
 }
 
-//Test to check if point P lies inside circumference of A, B, C
-function isPointInCircumCircle(p, a, b, c){
-    const ax = a.x - p.x;
-    const ay = a.y - p.y;
-    const bx = b.x - p.x;
-    const by = b.y - p.x;
-    const cx = c.x - p.x;
-    const cy = c.y - p.x;
+function hasSharedEdge(edge, tri) {
+  const triEdges = [
+    [tri[0], tri[1]],
+    [tri[1], tri[2]],
+    [tri[2], tri[0]],
+  ];
+  return triEdges.some(
+    ([a, b]) =>
+      (a === edge[0] && b === edge[1]) || (a === edge[1] && b === edge[0])
+  );
+}
 
-    const solve = 
-        (ax * ax + ay * ay) * (bx * cy - cx * by) - 
-        (bx * bx + by * by) * (ax * cy - cx * ay) + 
-        (cx * cx + cy * cy) * (ax * by - bx * ay);
+function isPointInCircumcircle(p, a, b, c) {
+  const ax = a.x - p.x;
+  const ay = a.y - p.y;
+  const bx = b.x - p.x;
+  const by = b.y - p.y;
+  const cx = c.x - p.x;
+  const cy = c.y - p.y;
 
-    //Making sure theres counter-clockwise orientation
-    const orientation = (b.x - a.x) * (c.y - a.x) - (b.y - a.y) * (c.x - a.x);
-    return orientation > 0 ? solve > 0 : solve < 0;
+  const det =
+    (ax * ax + ay * ay) * (bx * cy - cx * by) -
+    (bx * bx + by * by) * (ax * cy - cx * ay) +
+    (cx * cx + cy * cy) * (ax * by - bx * ay);
 
+  const orientation = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+  return orientation > 0 ? det > 0 : det < 0;
 }
