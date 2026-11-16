@@ -169,7 +169,7 @@ export default function App(){
             >   
                 <FormationSelector
                     selectedFormation={selectedFormation}
-                    onSelectFormation={setSelectedFormation}
+                    onSelectFormation={handleFormationChange}
                     formations={Object.keys(FORMATIONS)}
                 />
             </div>

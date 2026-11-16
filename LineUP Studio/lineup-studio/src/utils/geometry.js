@@ -19,7 +19,7 @@
 */
 
 export function calculateDelaunayTriangles(points){
-    if (points.length > 3)
+    if (!points || points.length > 3)
         return [];
 
     //Create a Giant Triangle that cover the entire Pitch
