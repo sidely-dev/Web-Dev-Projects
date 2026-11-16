@@ -107,7 +107,7 @@ export default function App(){
                 setPassArrows((prev) => [...prev ,{ ...draftArrow, id: Date.now()}])
             }
         }
-        setPassArrows(null);
+        setDraftArrow(null);
     }
 
     //CALCULATE DELAUNCY TRIANGLE FOR OUTFIELD PLAYERS (GOALKEEPER IS INDEX 0)
