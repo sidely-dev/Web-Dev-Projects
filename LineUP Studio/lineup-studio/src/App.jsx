@@ -126,10 +126,22 @@ export default function App(){
     const triangles = overlays.delaunay ? calculateDelaunayTriangles(outFieldPlayer) :  [];
 
 
+    //Dynamically Grouping players by formation numbers
+    const unitCounts = selectedFormation.split('-').map(Number);
+    const defEnd = 1 +  unitCounts[0];
+    const midEnd = defEnd + unitCounts[1];
+
+    const defensePlayers = players.slice(1, defEnd);
+    const midFieldPlayers = players.slice(defEnd, midEnd);
+    const attackingPlayers = players.slice(midEnd);
+
+    const avgX = (group) => group.length ? group.reduce((sum , p) => sum + p.x, 0) / group.length : 0;
+
+
     //CALCUALATE TACTICAL FROM PLAYER POSITIONS
-    const defenseX = players.slice(1, 5).reduce((sum, p) => sum + p.x, 0) / 4;
-    const midfieldX = players.slice(5, 8).reduce((sum, p) => sum + p.x, 0) /3;
-    const attackX = players.slice(8, 11).reduce((sum, p) => sum + p.x, 0) /3;
+    const defenseX = avgX(defensePlayers);
+    const midfieldX = avgX(midFieldPlayers);
+    const attackX = avgX(attackingPlayers);
 
 
 
