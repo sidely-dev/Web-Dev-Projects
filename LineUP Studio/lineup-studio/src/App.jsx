@@ -4,7 +4,15 @@ import PlayerToken from './components/PlayerToken.jsx';
 import FormationSelector  from './components/FormationSelector.jsx';
 import TacticalTools from './components/TacticalTools.jsx';
 import { FORMATIONS } from './data/formations.js';
-import { calculateDelaunayTriangles } from './utils/geometry.js'
+import { calculateDelaunayTriangles } from './utils/geometry.js';
+import './index.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
+
+)
 
 
 //Staring XI From Left to Right
