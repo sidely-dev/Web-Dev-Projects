@@ -1,0 +1,66 @@
+:root {
+  --bg-canvas: #0f172a;       /* Deep slate-navy background (not harsh pitch black) */
+  --bg-card: #1e293b;         /* Elevated Bento card surface */
+  --bg-card-hover: #273549;   /* Subtle interactive hover state */
+  --border-subtle: #334155;   /* Crisp 1px card border */
+  --text-primary: #f8fafc;    /* Clean off-white text */
+  --text-muted: #94a3b8;      /* Secondary label text */
+  --accent-emerald: #10b981;  /* Pitch & primary action accent */
+  --accent-cyan: #06b6d4;     /* Delaunay & tactical highlight */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Bento Grid Container */
+.studio-shell {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bento-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+
+/* Main Workspace: Pitch on Left (2.4fr), Controls on Right (1fr) */
+.bento-workspace {
+  display: grid;
+  grid-template-columns: 2.4fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Responsive fallback for tablets and phones */
+@media (max-width: 960px) {
+  .bento-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  display: block;
+}
