@@ -15,10 +15,40 @@ export default function TacticalTools({
 
     return(
         <div
-            style={{display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '16px', padding: '10px', backgroundColor: '#181818', borderRadius: '9px', border: '1px solid #33'}}
+            style={{display: 'flex', flexDirection: "column", gap: "20px"}}
 
         >
-            {/*Tactical shape & Structure Toggles*/}
+            {/*Shaptial Structures & Overlays*/}
+            <div>
+                <span className='section-label'> Tactical Overlays</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                    {overLayItems.map((item) => {
+                        const isActive = !!overLays[item.keys];
+                        return(
+                            <button
+                                key={item.key} type="button" onClick={() => onToggleOverlay(item.key)}
+                                style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 12px',
+                                    borderRadius: '10px', border: isActive ?'rgba(15, 23, 42, 0.85)' : '#0f172a', color: '#f8fafc',
+                                    cursor: 'pointer', textAlign: 'left', transition: 'all 0.18s ease',
+                                }}
+                            >
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px'}}>
+                                    <span
+                                        style={{ width: '28px', height: '28px', borderRadius: '7px', backgroundColor: isActive ? item.color : '#1e293b',
+                                            display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '14px',
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </span>
+
+                                </div>
+
+                            </button>
+                        )
+                    })}
+
+                </div>
+            </div>
             <button 
                 type="button" onClick={()=> onToggleOverlay('delaunay')} 
                 style={getButtonStyle(overLays.delaunay, "#00e5ff")}
