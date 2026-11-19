@@ -40,8 +40,20 @@ export default function TacticalTools({
                                     >
                                         {item.icon}
                                     </span>
-
+                                    <div>
+                                        <div style={{ fontSize: '13px', fontWeight: '600',}}>{item.label}</div>
+                                        <div style={{ fontSize: '11px', color: '#94a3b8'}}>{item.desc}</div>
+                                    </div>
                                 </div>
+
+                                {/* Status Pill */}
+                                <span
+                                    style={{ fontSize: '10px', fontWeight: '700', padding: '3px 7px', borderRadius: '99px',
+                                        backgroundColor: isActive ? item.color : '#1e293b', color: isActive ? '#0f172a' : '#64748b',
+                                    }}
+                                >
+                                    {isActive ? 'ON' : 'OFF'}
+                                </span>
 
                             </button>
                         )
@@ -49,66 +61,36 @@ export default function TacticalTools({
 
                 </div>
             </div>
-            <button 
-                type="button" onClick={()=> onToggleOverlay('delaunay')} 
-                style={getButtonStyle(overLays.delaunay, "#00e5ff")}
-            >
-                Triangles
-            </button>
 
-            <button
-                type="button"
-                onClick={()=> onToggleOverlay('halfSpaces')}
-                style={getButtonStyle(overLays.halfSpaces, "#ffca28")}
-            >
-                Half Spaces
-            </button>
-
-            <button
-                type="button"
-                onClick={()=> onToggleOverlay('unitLines')}
-                style={getButtonStyle(overLays.unitLines, "#66bb6a")}
-            >
-                Formation Lines
-            </button>
-
-            <button
-                type='button'
-                onClick={()=> onToggleOverlay('betweenLines')}
-                style={getButtonStyle(overLays.betweenLines, "#ab47bc")}
-            >
-                Between The Lines
-            </button>
-
-
-            {/*Divider */}
-            <div style={{width: "1px", backgroundColor: "#333", margin: "0 4px", }} />
-
-            {/*Line BREAKING PASS AAROW TOOL */}
-            <button
-                type='button'
-                onClick={()=> onToggleDrawPass}
-                style={getButtonStyle(isDrawingPass, "#ff5252")}
-
-            >
-                {isDrawingPass ? 'Drawing Pass (Drag on Pitch) ' : 'Line-Breaking Pass'}
-
-            </button>
-
-            {arrowCount > 0 && (
-                <button
-                    type="button"
-                    onClick={onClearArrows}
-                    style={{ 
-                        padding: "8px 12px", borderRadius: "6px", border: "1px solid #555", backgroundColor: "#2a1515",
-                         color: "#ff8a80", fontSize: "13px", cursor: "pointer",
+            {/*Drawing Tools */}
+            <div>
+                <span className='section-label'> Drawings</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                    <button
+                        type="button" onClick={onToggleDrawPass} 
+                        style={{width: '100%', padding: '11px 14px', borderRadius: '10px', border: isDrawingPass ? '1px solid #ef4444' : '1px solid #334155',
+                            backgroundColor: isDrawingPass ? 'rgba(239, 68, 68, 0.18)' : '#0f172a', color: isDrawingPass ? '#fca5a5' : '#f8fafc',
+                            fontWeight: '600', fontSize: '13px', cursor: 'pointer', display: 'flex', alignItems: 'center',
+                            justifyContent: 'center', gap: '8px',
                         }}
-                >
-                    Clear Passes ({arrowCount})
-                </button>
-                )
-            }
-
+                    >
+                    <span>↗</span>
+                    <span>{isDrawingPass ? 'Drawing Mode Active (Drag on Pitch)' : 'Draw Line-Breaking Pass'}</span>
+                    </button>
+                    {arrowCount > 0 && (
+                        <button
+                        type="button"
+                        onClick={onClearArrows}
+                        style={{
+                            width: '100%', padding: '8px 12px', borderRadius: '8px', border: '1px solid #475569',
+                            backgroundColor: 'transparent', color: '#94a3b8', fontSize: '12px', fontWeight: '600', cursor: 'pointer',
+                        }}
+                        >
+                            Clear All Pass Arrows ({arrowCount})
+                        </button>
+                    )}
+                    </div>
+            </div>
         </div>
     )
 
