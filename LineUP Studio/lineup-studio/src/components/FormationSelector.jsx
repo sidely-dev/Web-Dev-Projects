@@ -4,13 +4,16 @@ export default function FormationSelector({
     selectedFormation, onSelectFormation, formations
 }) {
     return(
-        <div style={{ marginBottom: "16px", display: 'flex', alignItems: 'center', gap: "10px" }}>
-            <label
-                htmlFor="formation-select"
-                style={{ color: "#ffffff", fontFamily:"sans-serif", fontWeight: "600"}}
+        <div style={{ marginBottom: "20px"}}>
+            <span className='selection-label'> Formation: </span>
+            <div
+                style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px", backgroundColor: "#0f172a", padding: "6px",
+                    borderRadius: "10px", border: "1px solid #3334155",
+                }}
             >
-                Formation:
-            </label>
+
+            </div>
+
 
             <select
                 id="formation-select" value={selectedFormation} onChange={(e) => onSelectFormation(e.target.value)}
