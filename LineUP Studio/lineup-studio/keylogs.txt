@@ -1,0 +1,10 @@
+cd lineup-studio
+npm run dev
+
+cd "C:\Users\HAPPY OMPILE\Downloads\PASSION PROJECTS\Web-Dev-Projects"
+git status
+
+
+git add "LineUP Studio/"
+git commit -m "feat(lineup-studio): push pitch, player tokens, and formation switcher"
+git push origin main

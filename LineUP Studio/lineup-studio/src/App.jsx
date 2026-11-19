@@ -257,6 +257,18 @@ export default function App(){
             )}
 
             {/*Line Breaking Pass Arrow */}
+            <defs>
+                <marker
+                    id="pass-arrowhead"
+                    markerWidth="10"
+                    markerHeight="7"
+                    refX="8"
+                    refY="3.5"
+                    orient="auto"
+                >
+                    <polygon points="0 0, 10 3.5, 0 7" fill="#ff5252" />
+                </marker>
+            </defs>
             <g pointerEvents="none">
                 {(passArrows || []).map((arrow) => (
                     <line  
