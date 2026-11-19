@@ -11,24 +11,23 @@ export default function FormationSelector({
                     borderRadius: "10px", border: "1px solid #3334155",
                 }}
             >
-
+                {formations.map((formationName) => {
+                    const isActive = selectedFormation === formationName;
+                    return(
+                        <button
+                            key={formationName} type='button' onClick={() => selectedFormation(formationName)}
+                            style={{
+                                padding: "8px 10px", borderRadius: "7px", border: "none", backgroundColor: isActive ? "#10bd98" : "transparent",
+                                color: isActive ? "0621ce":"#cbd5e1", fontWeight: "700", fontSize: "13px", cursor: "pointer", 
+                                transition: "all 0.2s ease",
+                            }}
+                        >
+                            {formationName}
+                        </button>
+                    )
+                })}
+       
             </div>
-
-
-            <select
-                id="formation-select" value={selectedFormation} onChange={(e) => onSelectFormation(e.target.value)}
-                style={{
-                    padding: "8px 12px", borderRadius:"6px", border: "1px solid #444", backgroundColor: "#ffffff",
-                    fontSize: "15px", cursor: 'pointer'
-                 }}
-            >
-                {formations.map((formationName) => (
-                    <option key={formationName}  value={formationName}  >
-                        {formationName}
-                    </option>
-                ))}
-            </select>
-
         </div>
     );
 }
