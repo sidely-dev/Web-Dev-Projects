@@ -161,189 +161,312 @@ export default function App(){
 
     }
 
+return (
+    <div className="studio-shell">
+        {/* 1. TOP STUDIO HEADER BAR */}
+        <header
+            className="bento-card"
+            style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', padding: '14px 20px',
+            }}
+        >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div
+                    style={{
+                        width: '34px', height: '34px', borderRadius: '8px', backgroundColor: '#10b981', color: '#062c1e', fontWeight: '900',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px',
+                    }}
+                >
+                    LS
+                </div>
 
+                <div>
+                    <h1 style={{ fontSize: '17px', fontWeight: '700', letterSpacing: '-0.01em' }}>
+                        LineUP Studio
+                    </h1>
+                    <p style={{ fontSize: '12px', color: '#94a3b8' }}>
+                        Interactive Tactical Board & Spatial Analysis
+                    </p>
+                </div>
+            </div>
 
-    return(
-        <div style={{ padding: '20px', maxWidth: '1000px', margin: '0 auto'}}>
-            <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap'}}
-            >   
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <span
+                    style={{
+                        padding: '6px 12px', borderRadius: '99px', backgroundColor: '#0f172a', border: '1px solid #334155',
+                        fontSize: '12px', fontWeight: '600', color: '#10b981',
+                    }}
+                >
+                    Active Shape: {selectedFormation}
+                </span>
+
+                <button
+                    type="button"
+                    onClick={() => handleFormationChange(selectedFormation)}
+                    style={{
+                        padding: '7px 14px', borderRadius: '8px', border: '1px solid #334155', backgroundColor: '#0f172a',
+                        color: '#e2e8f0', fontSize: '12px', fontWeight: '600', cursor: 'pointer',
+                    }}
+                >
+                    ↺ Reset Positions
+                </button>
+            </div>
+        </header>
+
+        {/* 2. MAIN BENTO WORKSPACE */}
+        <main className="bento-workspace">
+
+            {/* LEFT CARD: TACTICAL PITCH */}
+            <section className="bento-card" style={{ padding: '16px' }}>
+                <div
+                    style={{
+                        display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px',
+                    }}
+                >
+                    <span className="section-label" style={{ marginBottom: 0 }}>
+                        Tactical Pitch View
+                    </span>
+
+                    <span style={{ fontSize: '11px', color: '#94a3b8' }}>
+                        {isDrawingPass ? 'Click & drag on grass to draw pass' : 'Drag any player token to adjust shape'}
+                    </span>
+                </div>
+
+                <Pitch
+                    svgRef={svgRef}
+                    onPointerDown={handlePitchPointerDown}
+                    onPointerMove={handlePointerMove}
+                    onPointerUp={handlePointerUp}
+                >
+                    {/* SVG ARROWHEAD */}
+                    <defs>
+                        <marker
+                            id="pass-arrowhead" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto"
+                        >
+                            <polygon
+                                points="0 0, 10 3.5, 0 7" fill="#ff5252"
+                            />
+                        </marker>
+                    </defs>
+
+                    {/* 1. HALF-SPACES OVERLAY */}
+                    {overlays.halfSpaces && (
+                        <g pointerEvents="none">
+                            <rect
+                                x="25" y="138.5" width="1000" height="110" fill="rgba(255, 202, 40, 0.16)" stroke="rgba(255, 202, 40, 0.5)"
+                                strokeDasharray="6 4"
+                            />
+
+                            <text
+                                x="40" y="160" fill="#ffca28" fontSize="12" fontWeight="bold" opacity="0.85"
+                            >
+                                LEFT HALF-SPACE
+                            </text>
+
+                            <rect
+                                x="25" y="431.5" width="1000" height="110" fill="rgba(255, 202, 40, 0.16)" stroke="rgba(255, 202, 40, 0.5)"
+                                strokeDasharray="6 4"
+                            />
+
+                            <text
+                                x="40" y="530" fill="#ffca28" fontSize="12" fontWeight="bold" opacity="0.85"
+                            >
+                                RIGHT HALF-SPACE
+                            </text>
+                        </g>
+                    )}
+
+                    {/* 2. BETWEEN-THE-LINES POCKETS */}
+                    {overlays.betweenLines && (
+                        <g pointerEvents="none">
+                            <rect
+                                x={Math.min(defenseX, midfieldX) + 22}
+                                y="45"
+                                width={Math.max(
+                                    10,
+                                    Math.abs(midfieldX - defenseX) - 44
+                                )}
+                                height="590"
+                                rx="8"
+                                fill="rgba(171, 71, 188, 0.22)"
+                                stroke="#ce93d8"
+                                strokeWidth="1.5"
+                                strokeDasharray="5 5"
+                            />
+
+                            <rect
+                                x={Math.min(midfieldX, attackX) + 22}
+                                y="45"
+                                width={Math.max(
+                                    10,
+                                    Math.abs(attackX - midfieldX) - 44
+                                )}
+                                height="590" rx="8" fill="rgba(171, 71, 188, 0.22)" stroke="#ce93d8" strokeWidth="1.5"
+                                strokeDasharray="5 5"
+                            />
+                        </g>
+                    )}
+
+                    {/* 3. FORMATION UNIT LINES */}
+                    {overlays.unitLines && (
+                        <g pointerEvents="none">
+                            {[
+                                { label: 'DEFENSIVE LINE', x: defenseX },
+                                { label: 'MIDFIELD LINE', x: midfieldX },
+                                { label: 'ATTACKING LINE', x: attackX },
+                            ].map((unit) => (
+                                <g key={unit.label}>
+                                    <line
+                                        x1={unit.x}
+                                        y1="25"
+                                        x2={unit.x}
+                                        y2="655"
+                                        stroke="#69f0ae"
+                                        strokeWidth="3"
+                                        strokeDasharray="10 6"
+                                    />
+
+                                    <text
+                                        x={unit.x}
+                                        y="45"
+                                        textAnchor="middle"
+                                        fill="#69f0ae"
+                                        fontSize="11"
+                                        fontWeight="bold"
+                                    >
+                                        {unit.label}
+                                    </text>
+                                </g>
+                            ))}
+                        </g>
+                    )}
+
+                    {/* 4. DELAUNAY TRIANGULATION */}
+                    {overlays.delaunay && (
+                        <g pointerEvents="none">
+                            {(triangles || []).map((tri, idx) => (
+                                <polygon
+                                    key={idx}
+                                    points={`${tri[0].x},${tri[0].y} ${tri[1].x},${tri[1].y} ${tri[2].x},${tri[2].y}`}
+                                    fill="rgba(0, 229, 255, 0.1)"
+                                    stroke="#00e5ff"
+                                    strokeWidth="2"
+                                />
+                            ))}
+                        </g>
+                    )}
+
+                    {/* 5. PASS ARROWS */}
+                    <g pointerEvents="none">
+                        {(passArrows || []).map((arrow) => (
+                            <line
+                                key={arrow.id}
+                                x1={arrow.x1}
+                                y1={arrow.y1}
+                                x2={arrow.x2}
+                                y2={arrow.y2}
+                                stroke="#ff5252"
+                                strokeWidth="4"
+                                strokeDasharray="8 4"
+                                markerEnd="url(#pass-arrowhead)"
+                            />
+                        ))}
+
+                        {draftArrow && (
+                            <line
+                                x1={draftArrow.x1}
+                                y1={draftArrow.y1}
+                                x2={draftArrow.x2}
+                                y2={draftArrow.y2}
+                                stroke="#ff8a80"
+                                strokeWidth="4"
+                                strokeDasharray="6 4"
+                                markerEnd="url(#pass-arrowhead)"
+                            />
+                        )}
+                    </g>
+
+                    {/* 6. PLAYER TOKENS */}
+                    {(players || []).map((player) => (
+                        <PlayerToken
+                            key={player.id}
+                            number={player.number}
+                            name={player.name}
+                            x={player.x}
+                            y={player.y}
+                            color={player.color}
+                            isDragging={draggedPlayerID === player.id}
+                            onPointerDown={(e) => {
+                                if (isDrawingPass) return;
+
+                                e.stopPropagation();
+                                setDraggedPlayerID(player.id);
+                            }}
+                        />
+                    ))}
+                </Pitch>
+            </section>
+
+            {/* RIGHT CARD: TACTICAL CONTROLS */}
+            <aside className="bento-card">
                 <FormationSelector
                     selectedFormation={selectedFormation}
                     onSelectFormation={handleFormationChange}
                     formations={Object.keys(FORMATIONS)}
                 />
-            </div>
-            <TacticalTools
-                overlays={overlays}
-                onToggleOverlay={toggleOverlay}
-                isDrawingPass={isDrawingPass}
-                onToggleDrawPass={() => setIsDrawingPass((prev) => !prev)}
-                onClearArrows={() => setPassArrows([])}
-                arrowCount={passArrows?.length || 0}
 
-            />
-
-            <Pitch
-                svgRef={svgRef}
-                onPointerMove={handlePointerMove}
-                onPointerUp={handlePointerUp}
-                onPointerDown={handlePitchPointerDown}
-
-            
-            >
-
-            {/*SVG Arrow Head Marker */}
-            <def>
-                <marker id='pass-arrowhead' markerWidth="70" markerHeight="7" refX="8" refY="3.5" orient="auto">
-                    <shapes points="0 0, 10 3.5,  0 7" fill="#ff5252"/>
-                </marker>
-            </def>
-
-            {/*HALFSPACES OVERLAY */}
-            {overlays.halfSpaces && (
-                <g pointerEvents="none">
-                    {/*LEFT HALF SPACES [y: 138.5  to 248.5] */}
-                    <rect 
-                        x="25" y="138.5" width="1000" height="110" fill="rgba(255, 202, 40, 0.16)" stroke="rgba(255, 202, 40, 0.5)"
-                        strokeDasharray="6 4"
-                    />
-                    <text x="40" y="160" fill="#ffca28" fontSize="12" fontWeight="bold" opacity="0.85"  >
-                        LEFT HALF SPACE
-                    </text>
-
-                    {/*RIGHT HALF SPACE [y: 431 to 541.5 ] */}
-                    <rect
-                        x="25" y="431" width="1000" height="110" fill="rgba(255, 202, 40, 0.16)" stroke="rgba(255, 202,40, 0.5)" 
-                        strokeDasharray="6 4"
-                    />
-                    <text x="40" y="530" fill="#ffca28" fontSize="12" fontWeight="bold" opacity="0.85">
-                        RIGHT HALF SPACE
-                    </text>
-
-                </g>
-
-
-                
-            )}
-            {/* BETWEEN THE LINES*/}
-            {overlays.betweenLines && (
-                <g pointerEvents="none">
-                    {/*POCKET SPACE BETWEEN DEFENSE & MIDFIELD */}
-                    <rect
-                        x={Math.min(defenseX, midfieldX) + 22}
-                        y="45"
-                        width={Math.max(10, Math.abs(midfieldX - defenseX) - 44)}
-                        height="590" rx="8" fill="rgba(171, 71, 188, 0.22)" stroke="#ce93d8" strokeWidth="8" strokeDasharray="5 5"
-
-                    />
-                    {/*POCKET BETWEEN MIDFIELD & ATTACK */}
-                    <rect
-                        x={Math.min(midfieldX - attackX) + 22}
-                        y="45"
-                        width={Math.max(10, Math.abs(attackX - defenseX) - 44)}
-                        height="590" rx="8" fill="rgba(171, 71, 188, 0.22)" stroke="#ce93d8" strokeWidth="1.5" strokeDasharray="5 5"
-
-                    />
-                </g>
-
-            )}
-
-            {/* DELAUNAY TRIANGULATION MESH */}
-            {overlays.delaunay && (
-            <g pointerEvents="none">
-                {triangles.map((tri, idx) => (
-                <polygon
-                    key={idx}
-                    points={`${tri[0].x},${tri[0].y} ${tri[1].x},${tri[1].y} ${tri[2].x},${tri[2].y}`}
-                    fill="rgba(0, 229, 255, 0.12)"
-                    stroke="#00e5ff"
-                    strokeWidth="2"
+                <TacticalTools
+                    overlays={overlays}
+                    onToggleOverlay={toggleOverlay}
+                    isDrawingPass={isDrawingPass}
+                    onToggleDrawPass={() =>
+                        setIsDrawingPass((prev) => !prev)
+                    }
+                    onClearArrows={() => setPassArrows([])}
+                    arrowCount={passArrows?.length || 0}
                 />
-                ))}
-            </g>
-            )}
+            </aside>
+        </main>
 
-            {/*Line Breaking Pass Arrow */}
-            <defs>
-                <marker
-                    id="pass-arrowhead"
-                    markerWidth="10"
-                    markerHeight="7"
-                    refX="8"
-                    refY="3.5"
-                    orient="auto"
-                >
-                    <polygon points="0 0, 10 3.5, 0 7" fill="#ff5252" />
-                </marker>
-            </defs>
-            <g pointerEvents="none">
-                {(passArrows || []).map((arrow) => (
-                    <line  
-                        key={arrow.id} x1={arrow.x1} y1={arrow.y1} x2={arrow.x2} y2={arrow.y2} stroke="#ff5252" strokeWidth="4"
-                        strokeDasharray=" 8 4"
-                        markerEnd='url(#pass-arrowhead)'
-                    />
-                ))}
-                {draftArrow && (
-                    <line
-                        x1={draftArrow.x1} y1={draftArrow.y1} x2={draftArrow.x2} y2={draftArrow.y2} stroke='#ff5252' strokeWidth="4"
-                        strokeDasharray="6 4"
-                        markerEnd='url(#pass-arrowhead)'
-                    />
-                )}
-
-            </g>
-
-            {/* FORMATION UNIT LINES */}
-            {overlays.unitLines && (
-            <g pointerEvents="none">
-                {[
-                { label: 'DEFENSIVE LINE', x: defenseX },
-                { label: 'MIDFIELD LINE', x: midfieldX },
-                { label: 'ATTACKING LINE', x: attackX },
-                ].map((unit) => (
-                <g key={unit.label}>
-                    <line
-                    x1={unit.x}
-                    y1="25"
-                    x2={unit.x}
-                    y2="655"
-                    stroke="#69f0ae"
-                    strokeWidth="3"
-                    strokeDasharray="10 6"
-                    />
-                    <text
-                    x={unit.x}
-                    y="45"
-                    textAnchor="middle"
-                    fill="#69f0ae"
-                    fontSize="11"
-                    fontWeight="bold"
-                    >
-                    {unit.label}
-                    </text>
-                </g>
-                ))}
-            </g>
-            )}
-
-            {/*Player Tokens */}
-                {(players || []).map((player) => {
-                    return (
-                    <PlayerToken
-                        key={player.id} number={player.number} name={player.name} x={player.x} y={player.y} color={player.color}
-                        isDragging={draggePlayerID === player.id}
-                        onPointerDown={(e) =>{
-                            if(isDrawingPass) return; // Let the Pitch handle pass drawing when active
-                            e.stopPropagation();
-                            setDraggedPlayerID(player.id);
+        {/* 3. STARTING XI ROSTER */}
+        <footer
+            className="bento-card"
+            style={{ padding: '14px 18px' }}
+        >
+            <div
+                style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '8px',
+                }}
+            >
+                {(players || []).map((player) => (
+                    <div
+                        key={player.id}
+                        style={{
+                            display: 'flex', alignItems: 'center', gap: '6px', padding: '5px 10px', borderRadius: '8px',
+                            backgroundColor: '#0f172a', border: '1px solid #334155',fontSize: '12px',
                         }}
-                    />
-                    );
-                })};
-            </Pitch>
-        </div>
-    );
+                    >
+                        <span
+                            style={{
+                                fontWeight: '700', color: player.color || '#ef4444',
+                            }}
+                        >
+                            #{player.number}
+                        </span>
 
+                        <span
+                            style={{
+                                color: '#e2e8f0',fontWeight: '500',
+                            }}
+                        >
+                            {player.name}
+                        </span>
+                    </div>
+                ))}
+            </div>
+        </footer>
+    </div>
+);
 }
