@@ -4,18 +4,14 @@ export default function TacticalTools({
     overLays={}, onToggleOverlay, isDrawingPass, onToggleDrawPass, onClearArrows, arrowCount,
 
 }) {
-    const getButtonStyle = (isActive, accentColor="#00e5ff") => ({
-        padding: "8px 12px",
-        borderRadius: "3px",
-        border: isActive ?  `1px solid ${accentColor}` : "1px solid #444",
-        backgroundColor: isActive ? "rgba(0, 229, 225, 0.18)" : "#1e1e1e",
-        color: isActive ? accentColor : "#e0e0e0",
-        fontSize: "13px",
-        fontWeight: "600",
-        cursor: "pointer",
-        transition: " all 0.2s ease",
-        
-    })
+    const overLayItems=[
+        { key: 'deluanay', label: 'Triangles', icon: '△', color: '#06b6d4', desc: 'Passing network'},
+        {key: 'halfspaces', label: 'Half-spaces', icon: '▯', color: '#f59e0b', desc: 'Inside Vertical Channels'},
+        {key: 'unitLines', label: 'Formation Lines', icon: '||', color: '#10b981', desc: 'DEF | MID | ATT'},
+        {key: 'betweenLines', label: 'Between the Lines', icon:'◈', color: '#a855f7', desc: 'No. 10 receiving pockets' },
+
+    ]
+
 
     return(
         <div
