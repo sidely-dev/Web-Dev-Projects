@@ -6,7 +6,7 @@ export default function TacticalTools({
 }) {
     const overLayItems=[
         { key: 'deluanay', label: 'Triangles', icon: '△', color: '#06b6d4', desc: 'Passing network'},
-        {key: 'halfspaces', label: 'Half-spaces', icon: '▯', color: '#f59e0b', desc: 'Inside Vertical Channels'},
+        {key: 'halfSpaces', label: 'Half-Spaces', icon: '▯', color: '#f59e0b', desc: 'Inside Vertical Channels'},
         {key: 'unitLines', label: 'Formation Lines', icon: '||', color: '#10b981', desc: 'DEF | MID | ATT'},
         {key: 'betweenLines', label: 'Between the Lines', icon:'◈', color: '#a855f7', desc: 'No. 10 receiving pockets' },
 

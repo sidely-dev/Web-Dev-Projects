@@ -7,12 +7,6 @@ import { FORMATIONS } from './data/formations.js';
 import { calculateDelaunayTriangles } from './utils/geometry.js';
 import './index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>
-
-)
 
 
 //Staring XI From Left to Right
@@ -54,7 +48,7 @@ function applyFormation(squad, formationName){
 export default function App(){
     const [selectedFormation, setSelectedFormation] = useState('4-3-3');
     const [players, setPlayers] = useState(() => applyFormation(baseSquad, '4-3-3'));
-    const [draggePlayerID, setDraggedPlayerID] = useState(null);
+    const [draggedPlayerID, setDraggedPlayerID] = useState(null);
     const svgRef = useRef(null);
 
 
@@ -146,9 +140,9 @@ export default function App(){
         const coords = getPitchCoordinate(e);
 
         //Update Dragged Player Position
-        if(draggePlayerID !== null){
+        if(draggedPlayerID !== null){
             setPlayers((prevPlayers) => prevPlayers.map((player) => 
-                player.id === draggePlayerID ? { ...player, x: coords.x, y: coords.y} : player));
+                player.id === draggedPlayerID ? { ...player, x: coords.x, y: coords.y} : player));
             return;
         }
 
@@ -467,6 +461,6 @@ return (
                 ))}
             </div>
         </footer>
-    </div>
+    </div> 
 );
 }

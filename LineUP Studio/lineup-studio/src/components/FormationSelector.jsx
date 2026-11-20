@@ -15,7 +15,7 @@ export default function FormationSelector({
                     const isActive = selectedFormation === formationName;
                     return(
                         <button
-                            key={formationName} type='button' onClick={() => selectedFormation(formationName)}
+                            key={formationName} type='button' onClick={() => onSelectFormation(formationName)}
                             style={{
                                 padding: "8px 10px", borderRadius: "7px", border: "none", backgroundColor: isActive ? "#10bd98" : "transparent",
                                 color: isActive ? "0621ce":"#cbd5e1", fontWeight: "700", fontSize: "13px", cursor: "pointer", 
