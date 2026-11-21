@@ -17,72 +17,86 @@
     and "flips" it to connect the other two corners instead
 
 */
-
 export function calculateDelaunayTriangles(points) {
   if (!points || points.length < 3) return [];
 
-  const superTriangle = [
-    { x: -1000, y: -1000 },
-    { x: 3000, y: -1000 },
-    { x: 525, y: 3000 },
-  ];
+  // 1. Giant super-triangle enclosing the entire 1050x680 pitch
+  const p0 = { x: -2000, y: -2000 };
+  const p1 = { x: 4000, y: -2000 };
+  const p2 = { x: 525, y: 4000 };
 
-  let triangles = [superTriangle];
+  let triangles = [[p0, p1, p2]];
 
-  points.forEach((point) => {
+  // 2. Insert each player point one by one
+  for (let i = 0; i < points.length; i++) {
+    const pt = points[i];
     const badTriangles = [];
 
-    triangles.forEach((tri) => {
-      if (isPointInCircumcircle(point, tri[0], tri[1], tri[2])) {
+    for (let t = 0; t < triangles.length; t++) {
+      const tri = triangles[t];
+      if (inCircumcircle(pt, tri[0], tri[1], tri[2])) {
         badTriangles.push(tri);
       }
-    });
+    }
 
     const polygon = [];
-    badTriangles.forEach((tri) => {
+    for (let b = 0; b < badTriangles.length; b++) {
+      const tri = badTriangles[b];
       const edges = [
         [tri[0], tri[1]],
         [tri[1], tri[2]],
         [tri[2], tri[0]],
       ];
 
-      edges.forEach((edge) => {
-        const isShared = badTriangles.some(
-          (otherTri) => otherTri !== tri && hasSharedEdge(edge, otherTri)
-        );
-        if (!isShared) {
+      for (let e = 0; e < 3; e++) {
+        const edge = edges[e];
+        let shared = false;
+
+        for (let other = 0; other < badTriangles.length; other++) {
+          if (b === other) continue;
+          const otherTri = badTriangles[other];
+          const otherEdges = [
+            [otherTri[0], otherTri[1]],
+            [otherTri[1], otherTri[2]],
+            [otherTri[2], otherTri[0]],
+          ];
+
+          for (let oe = 0; oe < 3; oe++) {
+            if (
+              (edge[0] === otherEdges[oe][0] && edge[1] === otherEdges[oe][1]) ||
+              (edge[0] === otherEdges[oe][1] && edge[1] === otherEdges[oe][0])
+            ) {
+              shared = true;
+              break;
+            }
+          }
+          if (shared) break;
+        }
+
+        if (!shared) {
           polygon.push(edge);
         }
-      });
-    });
+      }
+    }
 
+    // Remove bad triangles and fill the hole with new triangles
     triangles = triangles.filter((tri) => !badTriangles.includes(tri));
-    polygon.forEach((edge) => {
-      triangles.push([edge[0], edge[1], point]);
-    });
-  });
+    for (let p = 0; p < polygon.length; p++) {
+      triangles.push([polygon[p][0], polygon[p][1], pt]);
+    }
+  }
 
+  // 3. Filter out any triangle connected to the initial super-triangle
   return triangles.filter(
     (tri) =>
-      !tri.some((vertex) =>
-        superTriangle.some((st) => st.x === vertex.x && st.y === vertex.y)
-      )
+      !tri.includes(p0) && !tri.includes(p1) && !tri.includes(p2)
   );
 }
 
-function hasSharedEdge(edge, tri) {
-  const triEdges = [
-    [tri[0], tri[1]],
-    [tri[1], tri[2]],
-    [tri[2], tri[0]],
-  ];
-  return triEdges.some(
-    ([a, b]) =>
-      (a === edge[0] && b === edge[1]) || (a === edge[1] && b === edge[0])
-  );
-}
+// Alias in case App.jsx imports computeDelaunayTriangles
+export const computeDelaunayTriangles = calculateDelaunayTriangles;
 
-function isPointInCircumcircle(p, a, b, c) {
+function inCircumcircle(p, a, b, c) {
   const ax = a.x - p.x;
   const ay = a.y - p.y;
   const bx = b.x - p.x;
@@ -95,6 +109,6 @@ function isPointInCircumcircle(p, a, b, c) {
     (bx * bx + by * by) * (ax * cy - cx * ay) +
     (cx * cx + cy * cy) * (ax * by - bx * ay);
 
-  const orientation = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
-  return orientation > 0 ? det > 0 : det < 0;
+  const orient = (b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x);
+  return orient > 0 ? det > 0 : det < 0;
 }
