@@ -119,12 +119,17 @@ export default function App(){
 
     //CALCUALATE TACTICAL FROM PLAYER POSITIONS
     const unitCounts = selectedFormation.split('-').map(Number);
-    const defEnd = 1 + unitCounts[0];
-    const midEnd = defEnd + unitCounts[1];
+    let cursor= 1; //Skips goalkepper
+    const unitLinesData =unitCounts.map((count, idx) => {
+        const group = players.slice(group, count + count);
+        cursor += count;
+        const avgX = group.length ? group.reduce((sum, p) => sum + p.x, 0) / length : 0;
+        const labels = ['DENFENSIVE LINE', 'MIDLFIELD LINE', 'ATTACKING MID', 'ATTACKING LINE'];
+        const label = unitCounts.length === 3 ? ['DENFENSIVE LINE', 'MIDLFIELD LINE', 'ATTACKING LINE'][idx] : labels[idx] || `LINE ${idx + 1}`;
+        return { label, x: avgX};
 
-    const defenseX = players.slice(1, defEnd).reduce((sum, p) => sum + p.x, 0) / unitCounts[0];
-    const midfieldX = players.slice(defEnd, midEnd).reduce((sum, p) => sum + p.x, 0) / unitCounts[1];
-    const attackX = players.slice(midEnd).reduce((sum, p) => sum + p.x, 0) / unitCounts[2];
+
+    })
 
 
 
