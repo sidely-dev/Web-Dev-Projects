@@ -1,37 +1,36 @@
 import React from 'react';
 
 export default function TacticalTools({
-    overLays={}, onToggleOverlay, isDrawingPass, onToggleDrawPass, onClearArrows, arrowCount,
-
+    overlays = {}, onToggleOverlay, isDrawingPass, onToggleDrawPass, onClearArrows, arrowCount,
 }) {
-    const overLayItems=[
-        { key: 'deluanay', label: 'Triangles', icon: '△', color: '#06b6d4', desc: 'Passing network'},
-        {key: 'halfSpaces', label: 'Half-Spaces', icon: '▯', color: '#f59e0b', desc: 'Inside Vertical Channels'},
-        {key: 'unitLines', label: 'Formation Lines', icon: '||', color: '#10b981', desc: 'DEF | MID | ATT'},
-        {key: 'betweenLines', label: 'Between the Lines', icon:'◈', color: '#a855f7', desc: 'No. 10 receiving pockets' },
+    const overLayItems = [
+        { key: 'delaunay', label: 'Triangles', icon: '△', color: '#06b6d4', desc: 'Passing network' },
+        { key: 'halfSpaces', label: 'Half-Spaces', icon: '▯', color: '#f59e0b', desc: 'Inside Vertical Channels' },
+        { key: 'unitLines', label: 'Formation Lines', icon: '||', color: '#10b981', desc: 'DEF | MID | ATT' },
+        { key: 'betweenLines', label: 'Between the Lines', icon: '◈', color: '#a855f7', desc: 'No. 10 receiving pockets' },
+    ];
 
-    ]
-
-
-    return(
-        <div
-            style={{display: 'flex', flexDirection: "column", gap: "20px"}}
-
-        >
-            {/*Shaptial Structures & Overlays*/}
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            {/* Spatial Structures & Overlays */}
             <div>
-                <span className='section-label'> Tactical Overlays</span>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px'}}>
+                <span className="section-label">Tactical Overlays</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {overLayItems.map((item) => {
-                        const isActive = !!overLays[item.keys];
-                        return(
+                        const isActive = !!overlays[item.key];
+                        return (
                             <button
-                                key={item.key} type="button" onClick={() => onToggleOverlay(item.key)}
-                                style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 12px',
-                                    borderRadius: '10px', border: isActive ?'rgba(15, 23, 42, 0.85)' : '#0f172a', color: '#f8fafc',
-                                    cursor: 'pointer', textAlign: 'left', transition: 'all 0.18s ease',
+                                key={item.key}
+                                type="button"
+                                onClick={() => onToggleOverlay(item.key)}
+                                style={{
+                                    display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 12px',
+                                    borderRadius: '10px', border: isActive ? `1px solid ${item.color}` : '1px solid #334155',
+                                    backgroundColor: isActive ? 'rgba(15, 23, 42, 0.85)' : '#0f172a', color: '#f8fafc', cursor: 'pointer',
+                                    textAlign: 'left', transition: 'all 0.18s ease',
                                 }}
                             >
+
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px'}}>
                                     <span
                                         style={{ width: '28px', height: '28px', borderRadius: '7px', backgroundColor: isActive ? item.color : '#1e293b',
