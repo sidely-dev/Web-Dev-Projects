@@ -76,7 +76,7 @@ export default function App(){
         setSelectedFormation(newFormation);
         setPlayers((prevPlayers) => {
             const safeSquad = prevPlayers || baseSquad;
-            return applyFormation(prevPlayers, newFormation);
+            return applyFormation(safeSquad, newFormation);
         });
         
     }

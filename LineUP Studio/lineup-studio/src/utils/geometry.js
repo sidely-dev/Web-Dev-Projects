@@ -1,22 +1,3 @@
-//Bowyer-Watson Delaunay Triangulation
-// Bowyer-Watson algorithm to compute Delaunay triangles from player { x, y } points
-
-/*
-    A Delaunay triangulation is a smart way to connect a set of points into a mesh of triangles that avoids long, skinny shapes.
-    It maximizes the smallest angle across all triangles, producing "well-shaped" or fat triangles that make math, 
-    physics, and graphics calculations much more reliable.
-
-
-    The Golden Rule: The Empty Circle Property
-
-    To decide which points should connect to form a triangle, Delaunay triangulation follows one strict rule:
-    • Draw a circumcircle. Imagine drawing a circle that passes directly through all three corners (vertices) of a triangle.
-    • Check the inside. That triangle is valid only if no other points from your dataset fall inside that circle.
-    • Flip if needed. 
-    If a fourth point sneaks inside the circle, the algorithm breaks the shared edge between the two neighboring triangles 
-    and "flips" it to connect the other two corners instead
-
-*/
 export function calculateDelaunayTriangles(points) {
   if (!points || points.length < 3) return [];
 
@@ -88,12 +69,10 @@ export function calculateDelaunayTriangles(points) {
 
   // 3. Filter out any triangle connected to the initial super-triangle
   return triangles.filter(
-    (tri) =>
-      !tri.includes(p0) && !tri.includes(p1) && !tri.includes(p2)
+    (tri) => !tri.includes(p0) && !tri.includes(p1) && !tri.includes(p2)
   );
 }
 
-// Alias in case App.jsx imports computeDelaunayTriangles
 export const computeDelaunayTriangles = calculateDelaunayTriangles;
 
 function inCircumcircle(p, a, b, c) {
